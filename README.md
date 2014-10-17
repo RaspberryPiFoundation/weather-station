@@ -52,13 +52,49 @@ Data logging code for the Raspberry Pi Weather Station HAT
   sudo apt-get install i2c-tools python-smbus apache2 mysql-server php5 libapache2-mod-php5 php5-mysql python-mysqldb telnet -y
   ```
   
-  You will be prompted to create and confirm a password for the root user of the MySQL database server. The password you choose will need to be put into `database.py` (line 87) unless you use `raspberry`.
+  This will take some time. You will be prompted to create and confirm a password for the root user of the MySQL database server. The password you choose will need to be put into `database.py` (line 87) unless you use `raspberry`.
+  
+1. Set up the required database with MySQL. Enter the password that you chose during installation.
+
+  `mysql -u root -p`
+  
+  You'll now be at the MySQL prompt `mysql>`, first create the database:
+  
+  `CREATE DATABASE weather;`
+  
+  Switch to that database:
+  
+  `USE weather;`
+  
+  Create the table that will store all of the weather measurements:
+  
+  ```
+  CREATE TABLE WEATHER_MEASUREMENT(
+    ID BIGINT NOT NULL AUTO_INCREMENT,
+    REMOTE_ID BIGINT,
+    AMBIENT_TEMPERATURE DECIMAL(6,2) NOT NULL,
+    GROUND_TEMPERATURE DECIMAL(6,2) NOT NULL,
+    AIR_QUALITY DECIMAL(6,2) NOT NULL,
+    AIR_PRESSURE DECIMAL(6,2) NOT NULL,
+    HUMIDITY DECIMAL(6,2) NOT NULL,
+    WIND_DIRECTION DECIMAL(6,2) NULL,
+    WIND_SPEED DECIMAL(6,2) NOT NULL,
+    WIND_GUST_SPEED DECIMAL(6,2) NOT NULL,
+    RAINFALL DECIMAL (6,2) NOT NULL,
+    CREATED TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY ( ID )
+  );
+  ```
   
 1. Remove the fake hardware clock package.
 
   `sudo apt-get remove fake-hwclock -y`
 
-1. Test that the I²C devices are online and working.
+1. Reboot for the changes to take effect.
+
+  `sudo reboot`
+
+1. Log in as usual. Test that the I²C devices are online and working.
 
   `sudo i2cdetect -y 1`
   
@@ -91,38 +127,6 @@ Data logging code for the Raspberry Pi Weather Station HAT
   ```
   
   This will create a new folder in the home directory called `weather-station`.
-
-1. Set up the required database with MySQL. Enter the password that you chose during installation.
-
-  `mysql -u root -p`
-  
-  You'll now be at the MySQL prompt `mysql>`, first create the database:
-  
-  `CREATE DATABASE weather;`
-  
-  Switch to that database:
-  
-  `USE weather;`
-  
-  Create the table that will store all of the weather measurements:
-  
-  ```
-  CREATE TABLE WEATHER_MEASUREMENT(
-    ID BIGINT NOT NULL AUTO_INCREMENT,
-    REMOTE_ID BIGINT,
-    AMBIENT_TEMPERATURE DECIMAL(6,2) NOT NULL,
-    GROUND_TEMPERATURE DECIMAL(6,2) NOT NULL,
-    AIR_QUALITY DECIMAL(6,2) NOT NULL,
-    AIR_PRESSURE DECIMAL(6,2) NOT NULL,
-    HUMIDITY DECIMAL(6,2) NOT NULL,
-    WIND_DIRECTION DECIMAL(6,2) NULL,
-    WIND_SPEED DECIMAL(6,2) NOT NULL,
-    WIND_GUST_SPEED DECIMAL(6,2) NOT NULL,
-    RAINFALL DECIMAL (6,2) NOT NULL,
-    CREATED TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY ( ID )
-  );
-  ```
   
   Press `Ctrl - D` to exit MySQL.
   
