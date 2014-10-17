@@ -139,7 +139,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
 1. Register your Weather Station with **Oracle** if you wish to upload your data so that it can be used by others.
 
-  Go [here](https://apex.oracle.com/pls/apex/f?p=28028:LOGIN_DESKTOP:127844066638258:&tz=1:00)
+  [Oracle Apex Database](https://apex.oracle.com/pls/apex/f?p=28028:LOGIN_DESKTOP:127844066638258:&tz=1:00)
   
   You will need to complete a form whereupon an activation email will be sent to you containing a code. Log in using your school name for the username and the password that you chose. You will then be prompted for the activation code from the email.
   
