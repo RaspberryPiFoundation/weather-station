@@ -29,7 +29,32 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano.
 
-1. Enable the RTC driver and the setting of the system clock at boot time.
+1. Ensure that a CR1225 coin cell battery has been inserted.
+1. Enable the Real Time Clock (RTC).
+
+  `echo "pcf8523 0x68" > /sys/class/i2c-adapter/i2c-1/new_device`
+  
+  Check that that it now appears in `/dev`
+  
+  `ls /dev/rtc*`
+  
+  Expect result: `/dev/rtc0`
+  
+1. Set the RTC time.
+
+  Use the `date` command to check the current system time is correct, if it you can set the RTC time (from the system clock) with the following command:
+  
+  `sudo hwclock -w`
+  
+  If it is not then you can set the RTC time manually using the following command (you'll need to change the `--date` parameter, this example will set the date the 1st of January 2014 at midnight):
+  
+  `sudo hwclock --set --date="2014-01-01 00:00:00" --utc`
+  
+  Then set the system clock frpm the RTC time.
+  
+  `sudo hwclock -s`
+
+1. Enable the RTC driver and setting the system clock at boot time.
 
   `sudo nano /etc/rc.local`
   
@@ -116,13 +141,13 @@ Data logging code for the Raspberry Pi Weather Station HAT
   30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
   40: 40 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
   50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  60: -- -- -- -- -- -- -- -- 68 69 -- -- -- -- -- --
+  60: -- -- -- -- -- -- -- -- UU 69 -- -- -- -- -- --
   70: -- -- -- -- -- -- -- 77
   ```
   
   - `40` = HTU21D. Humidity and temperature sensor.
   - `77` = BMP180. Barometric pressure sensor.
-  - `68` = PCF8523. Real Time Clock, after a reboot it will show as UU because it's reserved for the driver.
+  - `68` = PCF8523. Real Time Clock, it will show as `UU` because it's reserved by the driver.
   - `69` = MCP3427. Analogue to Digital Converter.
 
   Note: `40` and `77` will only show if you have connected the **AIR** board to the main board.
