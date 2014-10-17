@@ -63,6 +63,8 @@ Data logging code for the Raspberry Pi Weather Station HAT
   Then set the system clock from the RTC time.
   
   `sudo hwclock -s`
+  
+  You can passively display the time in the RTC using: `sudo hwclock -r`
 
 1. Enable loading the RTC driver and setting the system clock at boot time.
 
