@@ -117,7 +117,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   Expected result: `Query OK, 0 rows affected (0.05 sec)`
   
-  Press `Ctrl - D` to exit MySQL.
+  Press `Ctrl - D` or type `exit` to quit MySQL.
   
 1. Remove the fake hardware clock package.
 
@@ -216,8 +216,10 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   Enter the password. Then switch to the `weather` database:
   
-  `USE weather`
+  `USE weather;`
   
   Run a select query to return the contents of the `WEATHER_MEASUREMENT` table.
   
   `SELECT * FROM WEATHER_MEASUREMENT;`
+  
+  Press `Ctrl - D` or type `exit` to quit MySQL.
