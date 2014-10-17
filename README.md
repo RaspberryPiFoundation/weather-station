@@ -10,11 +10,11 @@ Data logging code for the Raspberry Pi Weather Station HAT
 
   `sudo nano /etc/modprobe.d/raspi-blacklist.conf`
 
-  Comment out the line `blacklist i2c-bcm2708` but putting a hash `#` at the start of the line.
+  Comment out the line `blacklist i2c-bcm2708` by putting a hash `#` at the start of the line.
   
   Press `Ctrl - O` to save and `Ctrl - X` to quit nano.
 
-1. Set the modules that load automatically on boot.
+1. Set the required modules to load automatically on boot.
 
   `sudo nano /etc/modules`
   
@@ -24,12 +24,12 @@ Data logging code for the Raspberry Pi Weather Station HAT
   i2c-dev
   rtc_pcf8523
   w1-gpio
-  w1-them
+  w1-therm
   ```
   
   Press `Ctrl - O` to save and `Ctrl - X` to quit nano.
 
-1. Enable the RTC driver and the setting of the system clock from it at boot time.
+1. Enable the RTC driver and the setting of the system clock at boot time.
 
   `sudo nano /etc/rc.local`
   
@@ -52,7 +52,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   sudo apt-get install i2c-tools python-smbus apache2 mysql-server php5 libapache2-mod-php5 php5-mysql python-mysqldb telnet -y
   ```
   
-  You will be prompted to create and confirm a password for the root user of the MySQL database server. The password you choose will need to be put into `database.py` unless you use `raspberry`.
+  You will be prompted to create and confirm a password for the root user of the MySQL database server. The password you choose will need to be put into `database.py` (line 87) unless you use `raspberry`.
   
 1. Remove the fake hardware clock package.
 
@@ -92,11 +92,10 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   This will create a new folder in the home directory called `weather-station`.
 
-1. Set up the required database with MySQL.
+1. Set up the required database with MySQL. Enter the password that you chose during installation.
 
   `mysql -u root -p`
   
-  Enter the password that you chose during installation.
   You'll now be at the MySQL prompt `mysql>`, first create the database:
   
   `CREATE DATABASE weather;`
@@ -125,6 +124,23 @@ Data logging code for the Raspberry Pi Weather Station HAT
   );
   ```
   
+  Press `Ctrl - D` to exit MySQL.
   
+1. Set the Weather Station daemon to automatically start at boot time.
+
+  `sudo nano /etc/rc.local`
   
+  Insert the following lines before `exit 0` at the bottom of the file:
   
+  ```
+  echo "Starting Weather Station daemon..."
+  /home/pi/weather-station/interrupt_daemon.py start
+  ```
+  
+1. Register your Weather Station with **Oracle** if you wish to upload your data so that it can be used by others.
+
+  Go [here](https://apex.oracle.com/pls/apex/f?p=28028:LOGIN_DESKTOP:127844066638258:&tz=1:00)
+  
+  You will need to complete a form whereupon an activation email will be sent to you containing a code. Log in using your school name for the username and the password that you chose. You will then be prompted for the activation code from the email.
+  
+  Many weather stations can belong to one school. Once you have logged in you'll need to create a new weather station under your school. The *latitude* and *longitude* of the weather station will be required for this. Once you have created a weather station it will have its own password automatically generated, this is used by the individual weather station itself when it uploads its measurements to Oracle.
