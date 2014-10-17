@@ -79,9 +79,11 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   This will take some time. You will be prompted to create and confirm a password for the root user of the MySQL database server. The password you choose will need to be put into `database.py` (line 87) unless you use `raspberry`.
   
-1. Set up the required database with MySQL. Enter the password that you chose during installation.
+1. Create the database within MySQL.
 
   `mysql -u root -p`
+  
+  Enter the password that you chose during installation.
   
   You'll now be at the MySQL prompt `mysql>`, first create the database:
   
