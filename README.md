@@ -34,9 +34,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   `sudo reboot`
 
 1. Ensure that a CR/BR1225 3 volt coin cell battery has been inserted. Positive `+` side facing up.
-1. Enable the Real Time Clock (RTC).
-
-  Drop into root:
+1. Enable the Real Time Clock (RTC). First drop into root:
   
   `sudo -s`
   
