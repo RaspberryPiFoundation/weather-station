@@ -29,7 +29,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano.
 
-1. Ensure that a CR1225 coin cell battery has been inserted.
+1. Ensure that a CR/BR1225 3 volt coin cell battery has been inserted. Positive `+` side facing up.
 1. Enable the Real Time Clock (RTC).
 
   `echo "pcf8523 0x68" > /sys/class/i2c-adapter/i2c-1/new_device`
