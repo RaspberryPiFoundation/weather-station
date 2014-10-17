@@ -82,3 +82,49 @@ Data logging code for the Raspberry Pi Weather Station HAT
   - `69` = MCP3427. Analogue to Digital Converter.
 
   Note: `40` and `77` will only show if you have connected the **AIR** board to the main board.
+
+1. Download the data logging code.
+
+  ```
+  cd ~
+  git clone https://github.com/raspberrypi/weather-station.git
+  ```
+  
+  This will create a new folder in the home directory called `weather-station`.
+
+1. Set up the required database with MySQL.
+
+  `mysql -u root -p`
+  
+  Enter the password that you chose during installation.
+  You'll now be at the MySQL prompt `mysql>`, first create the database:
+  
+  `CREATE DATABASE weather;`
+  
+  Switch to that database:
+  
+  `use weather;`
+  
+  Create the table that will store all of the weather measurements:
+  
+  ```
+  CREATE TABLE WEATHER_MEASUREMENT(
+    ID BIGINT NOT NULL AUTO_INCREMENT,
+    REMOTE_ID BIGINT,
+    AMBIENT_TEMPERATURE DECIMAL(6,2) NOT NULL,
+    GROUND_TEMPERATURE DECIMAL(6,2) NOT NULL,
+    AIR_QUALITY DECIMAL(6,2) NOT NULL,
+    AIR_PRESSURE DECIMAL(6,2) NOT NULL,
+    HUMIDITY DECIMAL(6,2) NOT NULL,
+    WIND_DIRECTION DECIMAL(6,2) NULL,
+    WIND_SPEED DECIMAL(6,2) NOT NULL,
+    WIND_GUST_SPEED DECIMAL(6,2) NOT NULL,
+    RAINFALL DECIMAL (6,2) NOT NULL,
+    CREATED TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY ( ID )
+  );
+  ```
+  
+  
+  
+  
