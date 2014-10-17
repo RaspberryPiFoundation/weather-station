@@ -214,7 +214,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
 
   `sudo ~/weather-station/log_all_sensors.py`
 
-1. The weather station will upload its data to Oracle every 15 minutes, but you can manually trigger an upload too with the following command:
+1. You can manually trigger an upload too with the following command:
 
   `sudo ~/weather-station/upload_to_oracle.py`
   
