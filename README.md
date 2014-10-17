@@ -194,10 +194,10 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   The following text commands can be used:
   
-  - `RAIN`: displays the Rainfall in ml
+  - `RAIN`: displays rainfall in ml
   - `WIND`: displays average wind speed in kph
   - `GUST`: displays wind gust speed in kph
-  - `RESET`: resets the rain gauge and the anemometer interrupt counts
+  - `RESET`: resets the rain gauge and the anemometer interrupt counts to zero
   - `BYE`: quits
   
   Use the `BYE` command to quit.
