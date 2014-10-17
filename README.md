@@ -137,7 +137,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   /home/pi/weather-station/interrupt_daemon.py start
   ```
   
-1. Register your Weather Station with **Oracle** if you wish to upload your data so that it can be used by others.
+1. If you wish you can register your Weather Station with a cloud based **Oracle** database so that it can be used by other schools.
 
   [Oracle Apex Database](https://apex.oracle.com/pls/apex/f?p=28028:LOGIN_DESKTOP:127844066638258:&tz=1:00)
   
