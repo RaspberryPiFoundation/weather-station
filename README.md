@@ -18,7 +18,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
 
   `sudo nano /etc/modules`
   
-  Add the following lines:
+  Add the following lines to the bottom of the file:
   
   ```
   i2c-dev
