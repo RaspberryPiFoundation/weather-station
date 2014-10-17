@@ -76,7 +76,9 @@ Data logging code for the Raspberry Pi Weather Station HAT
   70: -- -- -- -- -- -- -- 77
   ```
   
-  - 40 = HTU21D. Humidity and temperature sensor.
-  - 77 = BMP180. Barometric pressure sensor.
-  - 68 = PCF8523. Real Time Clock, maybe shown as UU because it's reserved for the driver.
-  - 69 = MCP3427. Analogue to Digital Converter.
+  - `40` = HTU21D. Humidity and temperature sensor.
+  - `77` = BMP180. Barometric pressure sensor.
+  - `68` = PCF8523. Real Time Clock, after a reboot it will show as UU because it's reserved for the driver.
+  - `69` = MCP3427. Analogue to Digital Converter.
+
+  Note: `40` and `77` will only show if you have connected the **AIR** board to the main board.
