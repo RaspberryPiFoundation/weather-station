@@ -40,21 +40,21 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   Expect result: `/dev/rtc0`
   
-1. Set the RTC time.
+1. Initialise the RTC with the correct time.
 
   Use the `date` command to check the current system time is correct, if it you can set the RTC time (from the system clock) with the following command:
   
   `sudo hwclock -w`
   
-  If it is not then you can set the RTC time manually using the following command (you'll need to change the `--date` parameter, this example will set the date the 1st of January 2014 at midnight):
+  If not then you can set the RTC time manually using the command below (you'll need to change the `--date` parameter, this example will set the date to the 1st of January 2014 at midnight):
   
   `sudo hwclock --set --date="2014-01-01 00:00:00" --utc`
   
-  Then set the system clock frpm the RTC time.
+  Then set the system clock from the RTC time.
   
   `sudo hwclock -s`
 
-1. Enable the RTC driver and setting the system clock at boot time.
+1. Enable the RTC driver and setting of the system clock at boot time.
 
   `sudo nano /etc/rc.local`
   
