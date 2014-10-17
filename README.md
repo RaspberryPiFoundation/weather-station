@@ -172,7 +172,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   /home/pi/weather-station/interrupt_daemon.py start
   ```
   
-1. If you wish you can register your Weather Station with a cloud based **Oracle** database so that it can be used by other schools.
+1. If you wish you can register your Weather Station with a cloud based **Oracle** database so that your data can be used by other schools.
 
   [Oracle Apex Database](https://apex.oracle.com/pls/apex/f?p=28028:LOGIN_DESKTOP:127844066638258:&tz=1:00)
   
@@ -201,3 +201,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
 1. The weather station will be ready when it comes up after a reboot.
 
   `sudo reboot`
+
+1. The cron scheduler will record a measurement from every sensor every 5 minutes, but you can manually cause a measurement to be taken at any time with the following command:
+
+  `sudo ~/weather-station/log_all_sensors.py`
