@@ -54,7 +54,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   `sudo hwclock -s`
 
-1. Enable the RTC driver and setting of the system clock at boot time.
+1. Enable loading the RTC driver and setting the system clock at boot time.
 
   `sudo nano /etc/rc.local`
   
@@ -233,5 +233,9 @@ Data logging code for the Raspberry Pi Weather Station HAT
   Run a select query to return the contents of the `WEATHER_MEASUREMENT` table.
   
   `SELECT * FROM WEATHER_MEASUREMENT;`
+  
+  After a lot of measurements have been recorded it will be sensible to use the SQL *where* clause to only select records that were created after a specific date and time:
+  
+  `SELECT * FROM WEATHER_MEASUREMENT WHERE CREATED > '2014-01-01 12:00:00`
   
   Press `Ctrl - D` or type `exit` to quit MySQL.
