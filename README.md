@@ -42,7 +42,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
 1. Initialise the RTC with the correct time.
 
-  Use the `date` command to check the current system time is correct, if it you can set the RTC time (from the system clock) with the following command:
+  Use the `date` command to check the current system time is correct. If correct then you can set the RTC time from the system clock with the following command:
   
   `sudo hwclock -w`
   
