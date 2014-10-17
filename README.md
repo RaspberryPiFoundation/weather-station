@@ -179,7 +179,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   Expected result: `PID: 2345` (your number will be different)
   
-  A continually running process is required to monitor the rain gauge and the anemometer. These are reed switch sensors and the code use interrupt detection. These interrupts can occur at any time as opposed to the scheduled measurements of the other sensors. You can use the telnet program to monitor it.
+  A continually running process is required to monitor the rain gauge and the anemometer. These are reed switch sensors and the code uses interrupt detection. These interrupts can occur at any time as opposed to the timed measurements of the other sensors. You can use the *telnet* program to test or monitor it.
   
   `telnet localhost 49501`
   
@@ -194,11 +194,11 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   The following text commands can be used:
   
-  - `RAIN`
-  - `WIND`
-  - `GUST`
-  - `RESET`
-  - `BYE`
+  - `RAIN`: displays the Rainfall in ml
+  - `WIND`: displays average wind speed in kph
+  - `GUST`: displays wind gust speed in kph
+  - `RESET`: resets the rain gauge and the anemometer interrupt counts
+  - `BYE`: quits
   
   Use the `BYE` command to quit.
 
