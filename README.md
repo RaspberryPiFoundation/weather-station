@@ -62,9 +62,13 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   `CREATE DATABASE weather;`
   
+  Expected result: `Query OK, 1 row affected (0.00 sec)`
+  
   Switch to that database:
   
   `USE weather;`
+  
+  Expected result: `Database changed`
   
   Create the table that will store all of the weather measurements:
   
@@ -85,6 +89,10 @@ Data logging code for the Raspberry Pi Weather Station HAT
     PRIMARY KEY ( ID )
   );
   ```
+  
+  Expected result: `Query OK, 0 rows affected (0.05 sec)`
+  
+  Press `Ctrl - D` to exit MySQL.
   
 1. Remove the fake hardware clock package.
 
@@ -127,8 +135,6 @@ Data logging code for the Raspberry Pi Weather Station HAT
   ```
   
   This will create a new folder in the home directory called `weather-station`.
-  
-  Press `Ctrl - D` to exit MySQL.
   
 1. Set the Weather Station daemon to automatically start at boot time.
 
