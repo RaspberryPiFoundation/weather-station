@@ -140,11 +140,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   sudo apt-get remove fake-hwclock -y
   ```
 
-1. Reboot for the changes to take effect.
-
-  `sudo reboot`
-
-1. Log in as usual. Test that the I²C devices are online and working.
+1. Test that the I²C devices are online and working.
 
   `sudo i2cdetect -y 1`
   
