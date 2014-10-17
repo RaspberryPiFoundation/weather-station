@@ -57,3 +57,26 @@ Data logging code for the Raspberry Pi Weather Station HAT
 1. Remove the fake hardware clock package.
 
   `sudo apt-get remove fake-hwclock -y`
+
+1. Test that the I²C devices are online and working.
+
+  `sudo i2cdetect -y 1`
+  
+  Expected output:
+  
+  ```
+       0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+  00:          -- -- -- -- -- -- -- -- -- -- -- -- --
+  10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  40: 40 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  60: -- -- -- -- -- -- -- -- 68 69 -- -- -- -- -- --
+  70: -- -- -- -- -- -- -- 77
+  ```
+  
+  - 40 = HTU21D. Humidity and temperature sensor.
+  - 77 = BMP180. Barometric pressure sensor.
+  - 68 = PCF8523. Real Time Clock, maybe shown as UU because it's reserved for the driver.
+  - 69 = MCP3427. Analogue to Digital Converter.
