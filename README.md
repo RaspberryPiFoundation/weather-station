@@ -12,7 +12,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
 
   Comment out the line `blacklist i2c-bcm2708` by putting a hash `#` at the start of the line.
   
-  Press `Ctrl - O` to save and `Ctrl - X` to quit nano.
+  Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano.
 
 1. Set the required modules to load automatically on boot.
 
@@ -27,7 +27,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   w1-therm
   ```
   
-  Press `Ctrl - O` to save and `Ctrl - X` to quit nano.
+  Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano.
 
 1. Enable the RTC driver and the setting of the system clock at boot time.
 
@@ -43,7 +43,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   hwclock -r
   ```
   
-  Press `Ctrl - O` to save and `Ctrl - X` to quit nano.
+  Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano.
 
 1. Install the necessary software packages.
 
@@ -153,7 +153,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   Replace the `name` and `key` parameters with the name and password of the weather station as specified in Oracle. The double quotes `"` enclosing these values are important so take care not to remove them by mistake.
   
-  Press `Ctrl - O` to save and `Ctrl - X` to quit nano.
+  Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano.
   
 1. Rename the credentials template file to enable it.
 
