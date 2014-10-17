@@ -12,6 +12,7 @@ class mysql_database:
             self.connection.commit()
         except:
             self.connection.rollback()
+            raise
 
     def query(self, query):
         cursor = self.connection.cursor(MySQLdb.cursors.DictCursor)
