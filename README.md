@@ -102,7 +102,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   Switch to that database:
   
-  `use weather;`
+  `USE weather;`
   
   Create the table that will store all of the weather measurements:
   
