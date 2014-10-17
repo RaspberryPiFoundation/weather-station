@@ -135,7 +135,10 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
 1. Remove the fake hardware clock package.
 
-  `sudo apt-get remove fake-hwclock -y`
+  ```
+  sudo update-rc.d fake-hwclock remove
+  sudo apt-get remove fake-hwclock -y
+  ```
 
 1. Reboot for the changes to take effect.
 
