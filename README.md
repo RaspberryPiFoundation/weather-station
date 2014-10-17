@@ -194,7 +194,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
 
   `mv credentials.template credentials`
 
-1. Enable the cron scheduler to automatically start taking measurements and uploading them to Oracle.
+1. Enable the cron scheduler to automatically start taking measurements. The measurements will be saved in the local MySQL database as well as uploaded to the Oracle Apex cloud database.
 
   `crontab < crontab.save`
 
