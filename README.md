@@ -194,7 +194,15 @@ Data logging code for the Raspberry Pi Weather Station HAT
 
   `mv credentials.template credentials`
 
-1. Enable the cron scheduler to automatically start taking measurements. The measurements will be saved in the local MySQL database as well as uploaded to the Oracle Apex cloud database.
+1. The main entry points for the code are `log_all_sensors.py` and `upload_to_oracle.py`. These will be called by the [cron](http://en.wikipedia.org/wiki/Cron) scheduler to automatically take measurements. The measurements will be saved in the local MySQL database as well as uploaded to the Oracle Apex Database online (if you registered).
+
+  The template crontab file `crontab.save` is provided as a default. If you wish to change the measurement or upload frequency then edit this file before going onto the next step:
+  
+  `nano crontab.save`
+  
+  Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano when you're done.
+
+1. Enable cron to automatically start taking measurements.
 
   `crontab < crontab.save`
 
@@ -202,7 +210,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
 
   `sudo reboot`
 
-1. The cron scheduler will record a measurement from every sensor every 5 minutes, but you can manually cause a measurement to be taken at any time with the following command:
+1. You can manually cause a measurement to be taken at any time with the following command:
 
   `sudo ~/weather-station/log_all_sensors.py`
 
