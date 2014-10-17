@@ -215,6 +215,8 @@ Data logging code for the Raspberry Pi Weather Station HAT
 1. You can manually cause a measurement to be taken at any time with the following command:
 
   `sudo ~/weather-station/log_all_sensors.py`
+  
+  Don't worry if you see `Warning: Data truncated for column X at row 1`, this is expected.
 
 1. You can manually trigger an upload too with the following command:
 
