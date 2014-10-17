@@ -143,4 +143,19 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   You will need to complete a form whereupon an activation email will be sent to you containing a code. Log in using your school name for the username and the password that you chose. You will then be prompted for the activation code from the email.
   
-  Many weather stations can belong to one school. Once you have logged in you'll need to create a new weather station under your school. The *latitude* and *longitude* of the weather station will be required for this. Once you have created a weather station it will have its own password automatically generated, this is used by the individual weather station itself when it uploads its measurements to Oracle.
+  Many weather stations can belong to one school. Once you have logged in you'll need to create a new weather station under your school. The *latitude* and *longitude* of the weather station will be required for this. Once you have created a weather station it will have its own password automatically generated, this is used by the weather station itself when it uploads the measurements to Oracle and is separate to your school login.
+  
+1. Add the weather station name and password to the local credentials file. This allows the code that uploads to Oracle to know what credentials to use.
+
+  `cd ~/weather-station`
+  
+  `nano credentials.template`
+  
+  Replace the `name` and `key` parameters with the name and password of the weather station as specified in Oracle. The double quotes `"` enclosing these values are important so take care not to remove them by mistake.
+  
+  Press `Ctrl - O` to save and `Ctrl - X` to quit nano.
+  
+1. Rename the credentials template file to enable it.
+
+  `mv credentials.template credentials`
+
