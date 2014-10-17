@@ -173,7 +173,35 @@ Data logging code for the Raspberry Pi Weather Station HAT
   ```
   
   This will create a new folder in the home directory called `weather-station`.
+1. Start the Weather Station daemon and test it.
+
+  `sudo ~/weather-station/interrupt_daemon.py start`
   
+  Expected result: `PID: 2345` (your number will be different)
+  
+  A continually running process is required to monitor the rain gauge and the anemometer. These are reed switch sensors and the code use interrupt detection. These interrupts can occur at any time as opposed to the scheduled measurements of the other sensors. You can use the telnet program to monitor it.
+  
+  `telnet localhost 49501`
+  
+  Expected result:
+  
+  ```
+  Trying 127.0.0.1...
+  Connected to localhost.
+  Escape character is '^]'.
+  OK
+  ```
+  
+  The following text commands can be used:
+  
+  - `RAIN`
+  - `WIND`
+  - `GUST`
+  - `RESET`
+  - `BYE`
+  
+  Use the `BYE` command to quit.
+
 1. Set the Weather Station daemon to automatically start at boot time.
 
   `sudo nano /etc/rc.local`
@@ -247,6 +275,6 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   After a lot of measurements have been recorded it will be sensible to use the SQL *where* clause to only select records that were created after a specific date and time:
   
-  `SELECT * FROM WEATHER_MEASUREMENT WHERE CREATED > '2014-01-01 12:00:00'`
+  `SELECT * FROM WEATHER_MEASUREMENT WHERE CREATED > '2014-01-01 12:00:00';`
   
   Press `Ctrl - D` or type `exit` to quit MySQL.
