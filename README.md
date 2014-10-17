@@ -46,7 +46,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   `ls /dev/rtc*`
   
-  Expect result: `/dev/rtc0`
+  Expected result: `/dev/rtc0`
   
   Press `Ctrl - D` to come out of root.
   
