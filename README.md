@@ -205,3 +205,19 @@ Data logging code for the Raspberry Pi Weather Station HAT
 1. The cron scheduler will record a measurement from every sensor every 5 minutes, but you can manually cause a measurement to be taken at any time with the following command:
 
   `sudo ~/weather-station/log_all_sensors.py`
+
+1. The weather station will upload its data to Oracle every 15 minutes, but you can manually trigger an upload too with the following command:
+
+  `sudo ~/weather-station/upload_to_oracle.py`
+  
+1. You can also view the data in the database using the following commands:
+
+  `mysql -u root -p`
+  
+  Enter the password. Then switch to the `weather` database:
+  
+  `USE weather`
+  
+  Run a select query to return the contents of the `WEATHER_MEASUREMENT` table.
+  
+  `SELECT * FROM WEATHER_MEASUREMENT;`
