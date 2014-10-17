@@ -159,3 +159,10 @@ Data logging code for the Raspberry Pi Weather Station HAT
 
   `mv credentials.template credentials`
 
+1. Enable the cron scheduler to automatically start taking measurements and uploading them to Oracle.
+
+  `crontab < crontab.save`
+
+1. The weather station will be ready when it comes up after a reboot.
+
+  `sudo reboot`
