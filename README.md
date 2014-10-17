@@ -47,10 +47,13 @@ Data logging code for the Raspberry Pi Weather Station HAT
 
 1. Install the necessary software packages.
 
-  `sudo apt-get update`
-  
-  `sudo apt-get install i2c-tools python-smbus apache2 mysql-server php5 libapache2-mod-php5 php5-mysql python-mysqldb telnet -y`
+  ```
+  sudo apt-get update
+  sudo apt-get install i2c-tools python-smbus apache2 mysql-server php5 libapache2-mod-php5 php5-mysql python-mysqldb telnet -y
+  ```
   
   You will be prompted to create and confirm a password for the root user of the MySQL database server. The password you choose will need to be put into `database.py` unless you use `raspberry`.
   
-  
+1. Remove the fake hardware clock package.
+
+  `sudo apt-get remove fake-hwclock -y`
