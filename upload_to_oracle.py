@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import os
-if os.path.isfile("credentials"):
+credentials_file = os.path.join(os.path.dirname(__file__), "credentials")
+if os.path.isfile(credentials_file):
     import database
     db = database.weather_database()
     db.upload()
