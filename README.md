@@ -253,9 +253,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
 
   `crontab < crontab.save`
 
-1. The weather station will be ready when it comes up after a reboot.
-
-  `sudo reboot`
+  Your weather station is now live and recording data at timed intervals.
 
 1. You can manually cause a measurement to be taken at any time with the following command:
 
