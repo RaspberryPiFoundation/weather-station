@@ -221,19 +221,19 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   Many weather stations can belong to one school. Once you have logged in you'll need to create a new weather station under your school. The *latitude* and *longitude* of the weather station will be required for this. Once you have created a weather station it will have its own password automatically generated, this is used by the weather station itself when it uploads the measurements to Oracle and is separate to your school login.
   
-1. Add the weather station name and password to the local credentials file. This allows the code that uploads to Oracle to know what credentials to use.
+1. Add the weather station name and password to the local Oracle credentials file. This allows the code that uploads to Oracle to know what credentials to use.
 
   `cd ~/weather-station`
   
-  `nano credentials.template`
+  `nano credentials.oracle.template`
   
-  Replace the `name` and `key` parameters with the name and password of the weather station as specified in Oracle. The double quotes `"` enclosing these values are important so take care not to remove them by mistake.
+  Replace the `name` and `key` parameters with the NAME and PASS of the weather station as specified in Oracle. The double quotes `"` enclosing these values are important so take care not to remove them by mistake.
   
   Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano.
   
-1. Rename the credentials template file to enable it.
+1. Rename the Oracle credentials template file to enable it.
 
-  `mv credentials.template credentials`
+  `mv credentials.oracle.template credentials.oracle`
 
 1. The main entry points for the code are `log_all_sensors.py` and `upload_to_oracle.py`. These will be called by the [cron](http://en.wikipedia.org/wiki/Cron) scheduler to automatically take measurements. The measurements will be saved in the local MySQL database as well as uploaded to the Oracle Apex Database online (if you registered).
 
