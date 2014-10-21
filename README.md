@@ -133,12 +133,6 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   Press `Ctrl - D` or type `exit` to quit MySQL.
 
-1. Update the to the local MySQL credentials file with the password for the root user that you chose.
-
-  `nano credentials.mysql`
-  
-  The PASSWORD field is probably the only one you need to change (unless you also chose `raspberry`). The double quotes `"` enclosing the values are important so take care not to remove them by mistake.
-
 1. Remove the fake hardware clock package.
 
   ```
@@ -240,6 +234,12 @@ Data logging code for the Raspberry Pi Weather Station HAT
 1. Rename the Oracle credentials template file to enable it.
 
   `mv credentials.oracle.template credentials.oracle`
+
+1. Update the to the local MySQL credentials file with the password for the MySQL *root* user that you chose during installation.
+
+  `nano credentials.mysql`
+  
+  The PASSWORD field is probably the only one you need to change (unless you also chose `raspberry`). The double quotes `"` enclosing the values are important so take care not to remove them by mistake.
 
 1. The main entry points for the code are `log_all_sensors.py` and `upload_to_oracle.py`. These will be called by the [cron](http://en.wikipedia.org/wiki/Cron) scheduler to automatically take measurements. The measurements will be saved in the local MySQL database as well as uploaded to the Oracle Apex Database online (if you registered).
 
