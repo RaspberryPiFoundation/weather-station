@@ -1,22 +1,14 @@
 #!/usr/bin/python
-from interrupt_client import *
-from database import *
+import interrupt_client, database, MCP342X, wind_direction, HTU21D, bmp085, tgs2600, ds18b20_therm
 
-from MCP342X import * #ADC
-from wind_direction import * #Wind direction
-from HTU21D import * #Humidity and Temp
-from bmp085 import * #Pressure and Temp
-from tgs2600 import * #Air Quality
-from ds18b20_therm import * #Temperature Probe
+pressure = bmp085.BMP085()
+temp_probe = ds18b20_therm.DS18B20()
+air_qual = tgs2600.TGS2600(adc_channel = 1)
+humidity = HTU21D.HTU21D()
+wind_dir = wind_direction.wind_direction(adc_channel = 0, margin = 20)
+interrupts = interrupt_client.interrupt_client(port = 49501)
 
-pressure = BMP085()
-temp_probe = DS18B20()
-air_qual = TGS2600(adc_channel = 1)
-humidity = HTU21D()
-wind_dir = wind_direction(adc_channel = 0, margin = 20)
-interrupts = interrupt_client(port = 49501)
-
-db = weather_database() #Local MySQL db
+db = database.weather_database() #Local MySQL db
 
 wind_average = wind_dir.get_value(10) #ten seconds
 
