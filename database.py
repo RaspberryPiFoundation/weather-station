@@ -28,7 +28,7 @@ class oracle_apex_database:
         self.path = path
         self.conn = httplib.HTTPSConnection(self.host)
         self.credentials = None
-        credentials_file = os.path.join(os.path.dirname(__file__), "credentials")
+        credentials_file = os.path.join(os.path.dirname(__file__), "credentials.oracle")
         
         if os.path.isfile(credentials_file):
             f = open(credentials_file, "r")
