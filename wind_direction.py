@@ -1,6 +1,5 @@
 #!/usr/bin/python
-import time
-from MCP342X import *
+import time, MCP342X
 
 class wind_direction(object):
     def __init__(self, adc_channel = 0, margin = 10):        
@@ -40,20 +39,19 @@ class wind_direction(object):
         return angle
         
     def get_value(self, length = 5):
-        adc = MCP342X.shared
+        adc = MCP342X.MCP342X.shared
         data = []
         print "Measuring wind direction for", length, "seconds..."
         start_time = time.time()
-
+        
         while time.time() - start_time <= length:
             adc_value = adc.read(0)
             direction = self.get_dir(adc_value)
             if direction != None: # keep only good measurements
                 data.append(direction)
-
+        
         average = None
-
         if len(data) > 0:
             average = sum(data) / len(data)
-
+        
         return average
