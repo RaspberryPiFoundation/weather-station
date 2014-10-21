@@ -87,7 +87,14 @@ class oracle_apex_database:
 
 class weather_database:
     def __init__(self):
-        self.db = mysql_database("localhost", "root", "raspberry", "weather")
+    	credentials_file = os.path.join(os.path.dirname(__file__), "credentials.mysql")
+    	f = open(credentials_file, "r")
+        credentials = json.load(f)
+        f.close()
+        for key, value in credentials.items(): #remove whitespace
+            credentials[key] = value.strip()
+            
+        self.db = mysql_database(credentials["HOST"], credentials["USERNAME"], credentials["PASSWORD"], credentials["DATABASE"])
         self.insert_template = "INSERT INTO WEATHER_MEASUREMENT (AMBIENT_TEMPERATURE, GROUND_TEMPERATURE, AIR_QUALITY, AIR_PRESSURE, HUMIDITY, WIND_DIRECTION, WIND_SPEED, WIND_GUST_SPEED, RAINFALL, CREATED) VALUES({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, '{9}');"
         self.update_template =  "UPDATE WEATHER_MEASUREMENT SET REMOTE_ID={0} WHERE ID={1};"
         self.upload_select_template = "SELECT * FROM WEATHER_MEASUREMENT WHERE REMOTE_ID IS NULL;"
