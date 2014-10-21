@@ -240,6 +240,8 @@ Data logging code for the Raspberry Pi Weather Station HAT
   `nano credentials.mysql`
   
   The PASSWORD field is probably the only one you need to change (unless you also chose `raspberry`). The double quotes `"` enclosing the values are important so take care not to remove them by mistake.
+  
+  Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano.
 
 1. The main entry points for the code are `log_all_sensors.py` and `upload_to_oracle.py`. These will be called by the [cron](http://en.wikipedia.org/wiki/Cron) scheduler to automatically take measurements. The measurements will be saved in the local MySQL database as well as uploaded to the Oracle Apex Database online (if you registered).
 
