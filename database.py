@@ -34,6 +34,8 @@ class oracle_apex_database:
             f = open(credentials_file, "r")
             self.credentials = json.load(f)
             f.close()
+            for key, value in self.credentials.items(): #remove whitespace
+                self.credentials[key] = value.strip()
         else:
             print "credentials file not found"
 
