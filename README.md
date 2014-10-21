@@ -89,8 +89,8 @@ Data logging code for the Raspberry Pi Weather Station HAT
   sudo apt-get install i2c-tools python-smbus telnet apache2 mysql-server python-mysqldb php5 libapache2-mod-php5 php5-mysql -y
   ```
   
-  This will take some time. You will be prompted to create and confirm a password for the root user of the MySQL database server. The password you choose will need to be put into `database.py` (line 87) unless you use `raspberry`.
-  
+  This will take some time. You will be prompted to create and confirm a password for the root user of the MySQL database server.
+
 1. Create the database within MySQL.
 
   `mysql -u root -p`
@@ -132,7 +132,13 @@ Data logging code for the Raspberry Pi Weather Station HAT
   Expected result: `Query OK, 0 rows affected (0.05 sec)`
   
   Press `Ctrl - D` or type `exit` to quit MySQL.
+
+1. Update the to the local MySQL credentials file with the password for the root user that you chose.
+
+  `nano credentials.mysql`
   
+  The PASSWORD field is probably the only one you need to change (unless you also chose `raspberry`). The double quotes `"` enclosing the values are important so take care not to remove them by mistake.
+
 1. Remove the fake hardware clock package.
 
   ```
