@@ -284,3 +284,5 @@ Data logging code for the Raspberry Pi Weather Station HAT
   `SELECT * FROM WEATHER_MEASUREMENT WHERE CREATED > '2014-01-01 12:00:00';`
   
   Press `Ctrl - D` or type `exit` to quit MySQL.
+
+1. Go [here](https://github.com/raspberrypi/weather-station-www) to download and install the demo website.
