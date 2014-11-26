@@ -132,7 +132,7 @@ class weather_database:
         rows_count = len(results)
         if rows_count > 0:
             print rows_count, "rows to send..."
-            odb = oracle_apex_database(path = "/pls/apex/jeffsalleh/weatherstation/submitmeasurement")
+            odb = oracle_apex_database(path = "/pls/apex/raspberrypi/weatherstation/submitmeasurement")
 
             if odb.credentials == None:
                 return #cannot upload
