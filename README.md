@@ -251,12 +251,23 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano when you're done.
 
-1. Enable cron to automatically start taking measurements.
+1. Heads up! At this point you may wish to stop and check out the Weather Station scheme of work ([here](https://github.com/raspberrypilearning/weather-station-sow)).
+1. Enable cron to automatically start taking measurements, also known as `data logging mode`. 
 
   `crontab < crontab.save`
 
   Your weather station is now live and recording data at timed intervals.
-
+  
+  You can disable data logging mode at any time by removing the crontab with the command below:
+  
+  `crontab -r`
+  
+  To enable data logging mode again use the command below:
+  
+  `crontab < ~/weather-station/crontab.save`
+  
+  *Note: Do not have data logging mode enabled while you're working through the data Collection lessons in the scheme of work.*
+  
 1. You can manually cause a measurement to be taken at any time with the following command:
 
   `sudo ~/weather-station/log_all_sensors.py`
