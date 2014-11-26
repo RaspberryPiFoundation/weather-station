@@ -221,6 +221,8 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   Many weather stations can belong to one school. Once you have logged in you'll need to create a new weather station under your school. The *latitude* and *longitude* of the weather station will be required for this. Once you have created a weather station it will have its own password automatically generated, this is used by the weather station itself when it uploads the measurements to Oracle and is separate to your school login.
   
+  *Note:* There is a known bug here where the *Add Weather Station* screen does not show a `Create` button, but only the `Return` one. If you experience this just log out and back in and that should fix it.
+  
 1. Add the weather station name and password to the local Oracle credentials file. This allows the code that uploads to Oracle to know what credentials to use.
 
   `cd ~/weather-station`
