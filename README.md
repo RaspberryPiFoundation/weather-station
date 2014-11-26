@@ -229,7 +229,7 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   `nano credentials.oracle.template`
   
-  Replace the `name` and `key` parameters with the NAME and PASS of the weather station as specified in Oracle. The double quotes `"` enclosing these values are important so take care not to remove them by mistake.
+  Replace the `name` and `key` parameters with the `Weather Station Name` and `Passcode` of the weather station as specified in Oracle (under *Home > Weather Stations*). The double quotes `"` enclosing these values in this file are important so take care not to remove them by mistake.
   
   Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano.
   
