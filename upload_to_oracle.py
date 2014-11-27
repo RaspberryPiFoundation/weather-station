@@ -14,6 +14,5 @@ if os.path.isfile(credentials_file):
         print "another upload is running exiting now"
     finally:
         f.close()
-        os.remove(lock_file)
 else:
     print "credentials file not found"
