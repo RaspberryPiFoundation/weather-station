@@ -12,8 +12,8 @@ db = database.weather_database() #Local MySQL db
 
 wind_average = wind_dir.get_value(10) #ten seconds
 
-print "Inserting..."
-db.insert(humidity.read_tmperature(), temp_probe.read_temp(), air_qual.get_value(), pressure.get_pressure(), humidity.read_humidity(), wind_average, interrupts.get_wind(), interrupts.get_wind_gust(), interrupts.get_rain())
-print "done"
+print("Inserting...")
+db.insert(humidity.read_temperature(), temp_probe.read_temp(), air_qual.get_value(), pressure.get_pressure(), humidity.read_humidity(), wind_average, interrupts.get_wind(), interrupts.get_wind_gust(), interrupts.get_rain())
+print("done")
 
 interrupts.reset()
