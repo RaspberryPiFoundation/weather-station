@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import time, os, sys, socket, math, atexit
 import RPi.GPIO as GPIO
 try:
@@ -84,8 +84,8 @@ class interrupt_daemon(object):
         self.socket_data = "{0}\n"
         
     def setup(self):
-        self.rain = rainfall_interrupt_watcher(0.2794, 06, 300) #Maplin rain gauge = 0.2794 ml per bucket tip, was 27 on prototype
-        self.wind = wind_speed_interrupt_watcher(9.0, 05, 1) #Maplin anemometer = radius of 9 cm, was 17 on prototype
+        self.rain = rainfall_interrupt_watcher(0.2794, 6, 300) #Maplin rain gauge = 0.2794 ml per bucket tip, was 27 on prototype
+        self.wind = wind_speed_interrupt_watcher(9.0, 5, 1) #Maplin anemometer = radius of 9 cm, was 17 on prototype
         
         try:
             self.skt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -97,24 +97,31 @@ class interrupt_daemon(object):
             raise
         
         self.skt.listen(10)
+        
+    def send(self, conn, s):
+        conn.sendall(s.encode('utf-8'))
+        
+    def receive(self, conn, length):
+        data = conn.recv(length)
+        return data.decode('utf-8')
     
     def handle_connection(self, conn):
         connected = True
-        conn.sendall("OK\n")    
+        self.send(conn, "OK\n")    
         
         while connected and self.running:
-            data = conn.recv(128)
+            data = self.receive(conn, 128)
             if len(data) > 0:
                 data = data.strip()
                 if data == "RAIN":
-                    conn.sendall(self.socket_data.format(self.rain.get_rainfall()))
+                    self.send(conn, self.socket_data.format(self.rain.get_rainfall()))
                 elif data == "WIND":                    
-                    conn.sendall(self.socket_data.format(self.wind.get_wind_speed()))
+                    self.send(conn, self.socket_data.format(self.wind.get_wind_speed()))
                 elif data == "GUST":
-                    conn.sendall(self.socket_data.format(self.wind.get_wind_gust_speed()))
+                    self.send(conn, self.socket_data.format(self.wind.get_wind_gust_speed()))
                 elif data == "RESET":
                     self.reset_counts()
-                    conn.sendall("OK\n")
+                    self.send(conn, "OK\n")
                 elif data == "BYE":                    
                     connected = False
                 elif data == "STOP":
@@ -185,7 +192,7 @@ class interrupt_daemon(object):
 def send_stop_signal(port):
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect(("localhost", port))
-    client.sendall("STOP")
+    client.sendall("STOP".encode('utf-8'))
     client.close()
 
 if __name__ == "__main__":
