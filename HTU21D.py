@@ -67,5 +67,5 @@ class HTU21D(object):
             
 if __name__ == "__main__":
     obj = HTU21D()
-    print "Temp:", obj.read_tmperature(), "C"
+    print "Temp:", obj.read_temperature(), "C"
     print "Humid:", obj.read_humidity(), "% rH"
