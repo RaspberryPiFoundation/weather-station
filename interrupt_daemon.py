@@ -99,7 +99,7 @@ class interrupt_daemon(object):
         self.skt.listen(10)
         
     def send(self, conn, s):
-        conn.sendall(s.encode('utf-8'))
+        conn.sendall(self.socket_data.format(s).encode('utf-8'))
         
     def receive(self, conn, length):
         data = conn.recv(length)
@@ -107,22 +107,22 @@ class interrupt_daemon(object):
     
     def handle_connection(self, conn):
         connected = True
-        self.send(conn, "OK\n")    
+        self.send(conn, "OK")    
         
         while connected and self.running:
             data = self.receive(conn, 128)
             if len(data) > 0:
                 data = data.strip()
                 if data == "RAIN":
-                    self.send(conn, self.socket_data.format(self.rain.get_rainfall()))
+                    self.send(conn, self.rain.get_rainfall())
                 elif data == "WIND":                    
-                    self.send(conn, self.socket_data.format(self.wind.get_wind_speed()))
+                    self.send(conn, self.wind.get_wind_speed())
                 elif data == "GUST":
-                    self.send(conn, self.socket_data.format(self.wind.get_wind_gust_speed()))
+                    self.send(conn, self.wind.get_wind_gust_speed())
                 elif data == "RESET":
                     self.reset_counts()
-                    self.send(conn, "OK\n")
-                elif data == "BYE":                    
+                    self.send(conn, "OK")
+                elif data == "BYE":
                     connected = False
                 elif data == "STOP":
                     connected = False
