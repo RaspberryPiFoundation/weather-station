@@ -27,22 +27,22 @@ class HTU21D(object):
         remainder = ( ( value[0] << 8 ) + value[1] ) << 8
         remainder |= value[2]
         
-        # POLYNOMIAL = 0x0131 = x^8 + x^5 + x^4 + 1 divsor = 
+        # POLYNOMIAL = 0x0131 = x^8 + x^5 + x^4 + 1 divisor = 
         # 0x988000 is the 0x0131 polynomial shifted to farthest 
         # left of three bytes
-        divsor = 0x988000
+        divisor = 0x988000
         
         for i in range(0, 16):
             if( remainder & 1 << (23 - i) ):
-                remainder ^= divsor
-            divsor = divsor >> 1
+                remainder ^= divisor
+            divisor = divisor >> 1
         
         if remainder == 0:
             return True
         else:
             return False
     
-    def read_tmperature(self):
+    def read_temperature(self):
         self.dev.write(CMD_READ_TEMP_NOHOLD) #measure temp
         time.sleep(.1)
         data = self.dev.read(3)
