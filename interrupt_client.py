@@ -5,8 +5,8 @@ class interrupt_client(object):
     def __init__(self, port):
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client.connect(("localhost", port))
-        if self.get_data() == "OK":
-            print "Connected to interrupt daemon"
+        assert(self.get_data() == "OK")
+        print("Connected to interrupt daemon")
             
     def get_data(self):
         buf = self.client.recv(128)
@@ -14,8 +14,12 @@ class interrupt_client(object):
         
     def send_command(self, command):
         self.client.sendall(command)
-        return float(self.get_data())
-                
+        data = self.get_data()
+        try:
+            return float(data)
+        except ValueError:
+            return None
+
     def get_rain(self):
         return self.send_command("RAIN")
 
@@ -27,10 +31,10 @@ class interrupt_client(object):
         
     def reset(self):
         self.client.sendall("RESET")
-        if self.get_data() == "OK":
-            print "Counts reset"
+        assert(self.get_data() == "OK")
+        print("Counts reset")
         
     def __del__(self):
         self.client.sendall("BYE")
         self.client.close()
-        print "Connection closed"
+        print("Connection closed")
