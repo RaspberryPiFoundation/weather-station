@@ -1,6 +1,10 @@
 #!/usr/bin/python
-import time, os, sys, socket, thread, math, atexit
+import time, os, sys, socket, math, atexit
 import RPi.GPIO as GPIO
+try:
+    import thread
+except ImportError:
+    import _thread as thread
 
 class interrupt_watcher(object):
     def __init__(self, sensorPin, bounceTime, peak_sample = 5, peak_monitor = False):
@@ -87,9 +91,10 @@ class interrupt_daemon(object):
             self.skt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.skt.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             self.skt.bind(("127.0.0.1", self.port))
+            self.running = True
         except socket.error as e:
-            print e
-            sys.exit(1)
+            print(e)
+            raise
         
         self.skt.listen(10)
     
@@ -131,8 +136,8 @@ class interrupt_daemon(object):
             if self.pid > 0:
                 sys.exit(0)
         except OSError as e:
-            print e
-            sys.exe(1)
+            print(e)
+            raise
         
         # decouple from parent environment
         os.chdir("/")
@@ -145,28 +150,32 @@ class interrupt_daemon(object):
             if self.pid > 0:
                 sys.exit(0)
         except OSError as e:
-            print e
-            sys.exe(1)
+            print(e)
+            raise
             
         # close file descriptors
         sys.stdout.flush()
         sys.stderr.flush()
         
     def start(self):
-        self.daemonize()
-        self.running = True
-        self.setup()
+        try:
+            self.daemonize()
+            self.setup()
         
-        print "PID:", os.getpid()
+            print("PID: %d" % os.getpid())
         
-        while self.running:
-            conn, addr =  self.skt.accept() #blocking call
+            while self.running:
+                conn, addr =  self.skt.accept() #blocking call
+                if self.running:
+                    thread.start_new_thread(self.handle_connection, (conn,))
+        except Exception:
             if self.running:
-                thread.start_new_thread(self.handle_connection, (conn,))
-        
-        self.skt.shutdown(socket.SHUT_RDWR)
-        self.skt.close()
-        GPIO.cleanup()
+                self.stop()
+        finally:
+            self.skt.shutdown(socket.SHUT_RDWR)
+            self.skt.close()
+            GPIO.cleanup()
+            print("Stopped")
         
     def stop(self):
         self.running = False        
@@ -177,8 +186,7 @@ def send_stop_signal(port):
     client.connect(("localhost", port))
     client.sendall("STOP")
     client.close()
-    print "Stopped"
-            
+
 if __name__ == "__main__":
     server_port = 49501
     if len(sys.argv) >= 2:
@@ -192,4 +200,4 @@ if __name__ == "__main__":
             time.sleep(1)
             interrupt_daemon(server_port).start()
     else:
-        print "usage: sudo {0} start|stop|restart".format(sys.argv[0])
+        print("usage: sudo {0} start|stop|restart".format(sys.argv[0]))
