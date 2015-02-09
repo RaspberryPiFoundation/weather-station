@@ -173,6 +173,14 @@ Data logging code for the Raspberry Pi Weather Station HAT
   ```
   
   This will create a new folder in the home directory called `weather-station`.
+1. **IMPORTANT**
+  - If you have the small HAT version of the weather board you must *skip* this step.
+  - If you have the massive prototype weather board (with the cloud graphic) you must *do* this step.
+
+  ```
+  cd weather-station
+  git checkout prototype
+  ```
 1. Start the Weather Station daemon and test it.
 
   `sudo ~/weather-station/interrupt_daemon.py start`
