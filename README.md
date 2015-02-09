@@ -148,22 +148,23 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   ```
        0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
-  00:          -- -- -- -- -- -- -- -- -- -- -- -- --
-  10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  40: 40 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  60: -- -- -- -- -- -- -- -- UU 69 -- -- -- -- -- --
-  70: -- -- -- -- -- -- -- 77
+  00:          -- -- -- -- -- -- -- -- -- -- -- -- -- 
+  10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+  20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+  30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+  40: 40 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+  50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+  60: -- -- -- -- -- -- -- -- UU 69 6a -- -- -- -- -- 
+  70: -- -- -- -- -- -- -- 77                         
   ```
   
   - `40` = HTU21D. Humidity and temperature sensor.
   - `77` = BMP180. Barometric pressure sensor.
   - `68` = PCF8523. Real Time Clock, it will show as `UU` because it's reserved by the driver.
-  - `69` = MCP3427. Analogue to Digital Converter.
+  - `69` = MCP3427. Analogue to Digital Converter on main board.
+  - `6a` = MCP3427. Analogue to Digital Converter on snap off AIR board (not present on prototype version).
 
-  Note: `40` and `77` will only show if you have connected the **AIR** board to the main board.
+  Note: `40`, `77` and `6a` will only show if you have connected the **AIR** board to the main board.
 
 1. Download the data logging code.
 
