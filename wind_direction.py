@@ -39,7 +39,7 @@ class wind_direction(object):
         return angle
         
     def get_value(self, length = 5):
-        adc = MCP342X.MCP342X.shared
+        adc = MCP342X.MCP342X(address = 0x69)
         data = []
         print "Measuring wind direction for", length, "seconds..."
         start_time = time.time()

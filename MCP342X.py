@@ -65,7 +65,7 @@ if MCP342X.shared == None:
     MCP342X()
 
 if __name__ == "__main__":
-    adc = MCP342X.shared
+    adc = MCP342X(address = 0x6A)
     adc.conversion()
     print "CH0:", adc.read(CHANNEL_0)
     print "CH1:", adc.read(CHANNEL_1)
