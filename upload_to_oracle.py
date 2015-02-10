@@ -6,13 +6,13 @@ if os.path.isfile(credentials_file):
     f = open(lock_file, 'w')
     try:
         fcntl.lockf(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        print "no other uploads in progress, proceeding..."
-        import database
+        print("No other uploads in progress, proceeding...")
+        import database # requires MySQLdb python 2 library which is not ported to python 3 yet
         db = database.weather_database()
         db.upload()
     except IOError:
-        print "another upload is running exiting now"
+        print("Another upload is running exiting now")
     finally:
         f.close()
 else:
-    print "credentials file not found"
+    print("Credentials file not found")
