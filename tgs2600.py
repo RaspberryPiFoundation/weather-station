@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import MCP342X
 
 class TGS2600(object):
@@ -8,5 +8,8 @@ class TGS2600(object):
     def get_value(self):
         adc = MCP342X.MCP342X(address = 0x6a)
         adc_value = adc.read(self.adc_channel)
-	print adc_value
         return (100.0 / adc.max) * (adc.max - adc_value) #as percentage
+
+if __name__ == "__main__":
+    obj = TGS2600(0)
+    print("Air Quality: %s %%" % obj.get_value())

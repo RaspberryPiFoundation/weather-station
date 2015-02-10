@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import io, fcntl 
 I2C_SLAVE=0x0703 
 

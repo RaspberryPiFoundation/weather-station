@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import time, MCP342X
 
 class wind_direction(object):
@@ -41,7 +41,7 @@ class wind_direction(object):
     def get_value(self, length = 5):
         adc = MCP342X.MCP342X(address = 0x69)
         data = []
-        print "Measuring wind direction for", length, "seconds..."
+        print("Measuring wind direction for %d seconds..." % length)
         start_time = time.time()
         
         while time.time() - start_time <= length:
@@ -55,3 +55,7 @@ class wind_direction(object):
             average = sum(data) / len(data)
         
         return average
+
+if __name__ == "__main__":
+    obj = wind_direction(0)
+    print("Wind Direction: %s" % obj.get_value(5))
