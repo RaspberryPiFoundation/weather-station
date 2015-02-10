@@ -1,5 +1,5 @@
 #!/usr/bin/python
-#Origin: https://github.com/tomhartley/AirPi
+#Origin: https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code/tree/master/Adafruit_BMP085
 
 import time
 import math
