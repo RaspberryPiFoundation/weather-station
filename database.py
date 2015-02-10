@@ -154,7 +154,7 @@ class weather_database:
                     if self.is_number(oracle_id):
                         local_id = str(row["ID"])
                         self.db.execute(self.update_template, (oracle_id, local_id))
-                        print("ID: %d updated with REMOTE_ID = %d" % (local_id, oracle_id))
+                        print("ID: %s updated with REMOTE_ID = %s" % (local_id, oracle_id))
                 else:
                     print("Bad response from Oracle")
         else:
