@@ -153,9 +153,8 @@ class weather_database:
                     oracle_id = json_dict["ORCL_RECORD_ID"]
                     if self.is_number(oracle_id):
                         local_id = str(row["ID"])
-                        params = (oracle_id, local_id)
-                        self.db.execute(self.update_template, params)
-                        print("ID: %d updated with REMOTE_ID = %d" % params)
+                        self.db.execute(self.update_template, (oracle_id, local_id))
+                        print("ID: %d updated with REMOTE_ID = %d" % (local_id, oracle_id))
                 else:
                     print("Bad response from Oracle")
         else:
