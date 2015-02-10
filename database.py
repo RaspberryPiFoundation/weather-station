@@ -13,9 +13,9 @@ class mysql_database:
         self.connection = MySQLdb.connect(credentials["HOST"], credentials["USERNAME"], credentials["PASSWORD"], credentials["DATABASE"])
         self.cursor = self.connection.cursor()
 
-    def execute(self, query):
+    def execute(self, query, params = []):
         try:
-            self.cursor.execute(query)
+            self.cursor.execute(query, params)
             self.connection.commit()
         except:
             self.connection.rollback()
@@ -44,7 +44,7 @@ class oracle_apex_database:
             for key, value in self.credentials.items(): #remove whitespace
                 self.credentials[key] = value.strip()
         else:
-            print "credentials file not found"
+            print("Credentials file not found")
 
         self.default_data = { "Content-type": "text/plain", "Accept": "text/plain" }
 
@@ -80,10 +80,10 @@ class oracle_apex_database:
                 self.conn.request("POST", self.path, None, headers)
                 response = self.conn.getresponse()
                 response_data = response.read()
-                print response.status, response.reason, response_data
+                print(response.status, response.reason, response_data)
                 success = response.status == 200 or response.status == 201
             except Exception as e:
-                print "Unexpected error", e
+                print("Unexpected error", e)
             finally:
                 attempt += 1
 
@@ -95,8 +95,8 @@ class oracle_apex_database:
 class weather_database:
     def __init__(self):
         self.db = mysql_database()
-        self.insert_template = "INSERT INTO WEATHER_MEASUREMENT (AMBIENT_TEMPERATURE, GROUND_TEMPERATURE, AIR_QUALITY, AIR_PRESSURE, HUMIDITY, WIND_DIRECTION, WIND_SPEED, WIND_GUST_SPEED, RAINFALL, CREATED) VALUES({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, '{9}');"
-        self.update_template =  "UPDATE WEATHER_MEASUREMENT SET REMOTE_ID={0} WHERE ID={1};"
+        self.insert_template = "INSERT INTO WEATHER_MEASUREMENT (AMBIENT_TEMPERATURE, GROUND_TEMPERATURE, AIR_QUALITY, AIR_PRESSURE, HUMIDITY, WIND_DIRECTION, WIND_SPEED, WIND_GUST_SPEED, RAINFALL, CREATED) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+        self.update_template =  "UPDATE WEATHER_MEASUREMENT SET REMOTE_ID=%s WHERE ID=%s;"
         self.upload_select_template = "SELECT * FROM WEATHER_MEASUREMENT WHERE REMOTE_ID IS NULL;"
 
     def is_number(self, s):
@@ -110,28 +110,25 @@ class weather_database:
         return val if val != None else "NULL"
 
     def insert(self, ambient_temperature, ground_temperature, air_quality, air_pressure, humidity, wind_direction, wind_speed, wind_gust_speed, rainfall, created = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")):
-        insert_query = self.insert_template.format(
-            self.is_none(ambient_temperature), 
-            self.is_none(ground_temperature), 
-            self.is_none(air_quality), 
-            self.is_none(air_pressure), 
-            self.is_none(humidity), 
-            self.is_none(wind_direction), 
-            self.is_none(wind_speed), 
-            self.is_none(wind_gust_speed), 
-            self.is_none(rainfall), 
-            created)
-
-        print insert_query
-
-        self.db.execute(insert_query)
+        params = ( ambient_temperature,
+            ground_temperature,
+            air_quality,
+            air_pressure,
+            humidity,
+            wind_direction,
+            wind_speed,
+            wind_gust_speed,
+            rainfall,
+            created )
+        print(self.insert_template % params)
+        self.db.execute(self.insert_template, params)
 
     def upload(self):
         results = self.db.query(self.upload_select_template)
 
         rows_count = len(results)
         if rows_count > 0:
-            print rows_count, "rows to send..."
+            print("%d rows to send..." % rows_count)
             odb = oracle_apex_database(path = "/pls/apex/raspberrypi/weatherstation/submitmeasurement")
 
             if odb.credentials == None:
@@ -156,10 +153,10 @@ class weather_database:
                     oracle_id = json_dict["ORCL_RECORD_ID"]
                     if self.is_number(oracle_id):
                         local_id = str(row["ID"])
-                        update_query = self.update_template.format(oracle_id, local_id)
-                        self.db.execute(update_query)
-                        print "ID:", local_id, "updated with REMOTE_ID =", oracle_id
+                        params = (oracle_id, local_id)
+                        self.db.execute(self.update_template, params)
+                        print("ID: %d updated with REMOTE_ID = %d" % params)
                 else:
-                    print "Bad response from Oracle"
+                    print("Bad response from Oracle")
         else:
-            print "Nothing to upload"
+            print("Nothing to upload")
