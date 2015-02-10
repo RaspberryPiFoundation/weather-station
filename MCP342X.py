@@ -1,25 +1,22 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import struct, array, time, i2c_base
 
 CHANNEL_0 = 0
 CHANNEL_1 = 1
 
-CMD_ZERO = "\x00"
-CMD_RESET = "\x06"
-CMD_LATCH = "\x04"
-CMD_CONVERSION = "\x08"
-CMD_READ_CH0_16BIT = "\x88"
-CMD_READ_CH1_16BIT = "\xA8"
+CMD_ZERO = b"\x00"
+CMD_RESET = b"\x06"
+CMD_LATCH = b"\x04"
+CMD_CONVERSION = b"\x08"
+CMD_READ_CH0_16BIT = b"\x88"
+CMD_READ_CH1_16BIT = b"\xA8"
 
 msleep = lambda x: time.sleep(x/1000.0)
 
 class MCP342X(object):
-    shared = None
     def __init__(self, address = 0x69):
         self.dev = i2c_base.i2c(address, 1)
         self.max = 32767.0 #15 bits
-        if MCP342X.shared == None:
-            MCP342X.shared = self
         self.reset()
 
     def reset(self):
@@ -54,18 +51,22 @@ class MCP342X(object):
         status = buf[2]
         result = None
 
-        if status & 128 != 128: #check ready bit = 0
+        if status & 128 != 128: # check ready bit = 0
             result = buf[0] << 8 | buf[1]
         else:
-            print "Not ready"
+            print("Not ready")
 
         return result
 
-if MCP342X.shared == None:
-    MCP342X()
-
 if __name__ == "__main__":
-    adc = MCP342X(address = 0x6A)
-    adc.conversion()
-    print "CH0:", adc.read(CHANNEL_0)
-    print "CH1:", adc.read(CHANNEL_1)
+    adc_main = MCP342X(address = 0x69) # ADC on the main HAT board
+    adc_main.conversion()
+
+    adc_air = MCP342X(address = 0x6A) # ADC on the snap off part with the AIR sensors
+    adc_air.conversion()
+
+    print("MAIN CH0: %s" % adc_main.read(CHANNEL_0)) # wind vane
+    print("MAIN CH1: %s" % adc_main.read(CHANNEL_1)) # not populated
+
+    print("AIR CH0: %s" % adc_air.read(CHANNEL_0)) # air quality
+    print("AIR CH1: %s" % adc_air.read(CHANNEL_1)) # not populated
