@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import MySQLdb, datetime, httplib, json, os
-
+# requires MySQLdb python 2 library which is not ported to python 3 yet
 class mysql_database:
     def __init__(self):
     	credentials_file = os.path.join(os.path.dirname(__file__), "credentials.mysql")
@@ -80,7 +80,7 @@ class oracle_apex_database:
                 self.conn.request("POST", self.path, None, headers)
                 response = self.conn.getresponse()
                 response_data = response.read()
-                print(response.status, response.reason, response_data)
+                print("Response status: %s, Response reason: %s, Response data: %s" % (response.status, response.reason, response_data))
                 success = response.status == 200 or response.status == 201
             except Exception as e:
                 print("Unexpected error", e)
