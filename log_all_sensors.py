@@ -1,5 +1,6 @@
 #!/usr/bin/python
-import interrupt_client, database, MCP342X, wind_direction, HTU21D, bmp085, tgs2600, ds18b20_therm
+import interrupt_client, MCP342X, wind_direction, HTU21D, bmp085, tgs2600, ds18b20_therm
+import database # requires MySQLdb python 2 library which is not ported to python 3 yet
 
 pressure = bmp085.BMP085()
 temp_probe = ds18b20_therm.DS18B20()
