@@ -1,14 +1,14 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import struct, array, time, i2c_base
 
 HTU21D_ADDR = 0x40 
-CMD_READ_TEMP_HOLD = "\xE3" 
-CMD_READ_HUM_HOLD = "\xE5" 
-CMD_READ_TEMP_NOHOLD = "\xF3" 
-CMD_READ_HUM_NOHOLD = "\xF5" 
-CMD_WRITE_USER_REG = "\xE6" 
-CMD_READ_USER_REG = "\xE7" 
-CMD_SOFT_RESET= "\xFE" 
+CMD_READ_TEMP_HOLD = b"\xE3" 
+CMD_READ_HUM_HOLD = b"\xE5" 
+CMD_READ_TEMP_NOHOLD = b"\xF3" 
+CMD_READ_HUM_NOHOLD = b"\xF5" 
+CMD_WRITE_USER_REG = b"\xE6" 
+CMD_READ_USER_REG = b"\xE7" 
+CMD_SOFT_RESET= b"\xFE" 
 
 class HTU21D(object):
     def __init__(self):
@@ -67,5 +67,5 @@ class HTU21D(object):
             
 if __name__ == "__main__":
     obj = HTU21D()
-    print "Temp:", obj.read_temperature(), "C"
-    print "Humid:", obj.read_humidity(), "% rH"
+    print("Temp: %s C" % obj.read_temperature())
+    print("Humid: %s %% rH" %  obj.read_humidity())
