@@ -59,21 +59,11 @@ Data logging code for the Raspberry Pi Weather Station HAT
   `sudo reboot`
 
 1. Ensure that a CR/BR1225 3 volt coin cell battery has been inserted. Positive `+` side facing up.
-1. Enable the Real Time Clock (RTC). First drop into root:
-  
-  `sudo -s`
-  
-  Enable the RTC:
-
-  `echo "pcf8523 0x68" > /sys/class/i2c-adapter/i2c-1/new_device`
-  
-  Check that that it now appears in `/dev`
+1. Check that the Real Time Clock appears in `/dev`
   
   `ls /dev/rtc*`
   
   Expected result: `/dev/rtc0`
-  
-  Press `Ctrl - D` to come out of root.
   
 1. Initialise the RTC with the correct time.
 
@@ -91,15 +81,13 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   You can passively display the time in the RTC using: `sudo hwclock -r`
 
-1. Enable loading the RTC driver and setting the system clock at boot time.
+1. Enable setting the system clock at boot time.
 
   `sudo nano /etc/rc.local`
   
   Insert the following lines before `exit 0` at the bottom of the file:
   
   ```
-  echo "pcf8523 0x68" > /sys/class/i2c-adapter/i2c-1/new_device
-  sleep 2
   echo "Setting System clock from RTC..."
   hwclock -s
   hwclock -r
