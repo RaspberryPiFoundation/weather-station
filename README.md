@@ -6,15 +6,42 @@ Data logging code for the Raspberry Pi Weather Station HAT
 ## Instructions to deploy
 
 1. Start with a fresh install of Raspbian. Boot up as per usual and expand the filesystem to fill the SD card.
-1. Un-blacklist the I²C module.
+1. Enable I²C. Enter the following command after logging into your Pi:
 
-  `sudo nano /etc/modprobe.d/raspi-blacklist.conf`
+  `sudo raspi-config`
+  
+  Select `Advanced Options` and press `Enter`
+  
+  Select `I2C` and press `Enter`
+  
+  *Note: If you do not see the `I2C` option listed it means you have an old image of Raspbian. Please visit the [downloads](http://www.raspberrypi.org/downloads/) page and update your SD card to the latest version.*
+  
+  Would you like the ARM I2C interface to be enabled? `Yes` > `Enter`
+  
+  The ARM I2C interface is enabled `Ok` > `Enter`
+  
+  Would you like the I2C kernel module to be loaded by default? `Yes` > `Enter`
+  
+  I2C kernel module will now be loaded by default `Ok` > `Enter`
+  
+  Select `Finish` from the main menu and press `Enter`
+  
+  Would you like to reboot now? `Yes` > `Enter`
 
-  Comment out the line `blacklist i2c-bcm2708` by putting a hash `#` at the start of the line.
+1. Log back in and configure the required device tree overlays. Enter the following command:
+
+  `sudo nano /boot/config.txt`
+  
+  Add the following lines to the bottom of the file:
+  
+  ```
+  dtoverlay=w1-gpio
+  dtoverlay=pcf8523-rtc
+  ```
   
   Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano.
 
-1. Set the required modules to load automatically on boot.
+  Now set the required modules to load automatically on boot.
 
   `sudo nano /etc/modules`
   
@@ -22,8 +49,6 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   ```
   i2c-dev
-  rtc_pcf8523
-  w1-gpio
   w1-therm
   ```
   
