@@ -11,5 +11,5 @@ class TGS2600(object):
         return (100.0 / adc.max) * (adc.max - adc_value) #as percentage
 
 if __name__ == "__main__":
-    obj = TGS2600(0)
+    obj = TGS2600(1)
     print("Air Quality: %s %%" % obj.get_value())
