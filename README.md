@@ -83,16 +83,28 @@ Data logging code for the Raspberry Pi Weather Station HAT
 
 1. Enable setting the system clock at boot time.
 
-  `sudo nano /etc/rc.local`
+  `sudo nano /lib/udev/hwclock-set`
   
-  Insert the following lines before `exit 0` at the bottom of the file:
-  
+  Find the two lines that read:
   ```
-  echo "Setting System clock from RTC..."
-  hwclock -s
-  hwclock -r
+  /sbin/hwclock --rtc=$dev --systz --badyear
+  ```
+  and
+  ```
+    /sbin/hwclock --rtc=$dev --systz
   ```
   
+  Change the *--systz* options to *--hctosys*
+
+so that it reads
+
+```
+    /sbin/hwclock --rtc=$dev --hctosys --badyear
+else
+    /sbin/hwclock --rtc=$dev --hctosys
+fi
+```
+
   Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano.
 
 1. Install the necessary software packages.
