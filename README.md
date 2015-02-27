@@ -81,29 +81,29 @@ Data logging code for the Raspberry Pi Weather Station HAT
   
   You can passively display the time in the RTC using: `sudo hwclock -r`
 
-1. Enable setting the system clock at boot time.
+1. Enable setting the system clock automatically at boot time. First edit the hwclock udev rule:
 
   `sudo nano /lib/udev/hwclock-set`
   
-  Find the two lines that read:
-  ```
-  /sbin/hwclock --rtc=$dev --systz --badyear
-  ```
-  and
-  ```
-    /sbin/hwclock --rtc=$dev --systz
-  ```
+  Find the lines at the bottom that read:
   
-  Change the *--systz* options to *--hctosys*
+  ```
+  if [ yes = "$BADYEAR" ] ; then
+      /sbin/hwclock --rtc=$dev --systz --badyear
+  else
+      /sbin/hwclock --rtc=$dev --systz
+  fi
+  ```
 
-so that it reads
-
-```
-    /sbin/hwclock --rtc=$dev --hctosys --badyear
-else
-    /sbin/hwclock --rtc=$dev --hctosys
-fi
-```
+  Change the `--systz` options to `--hctosys` so that they read:
+  
+  ```
+  if [ yes = "$BADYEAR" ] ; then
+      /sbin/hwclock --rtc=$dev --hctosys --badyear
+  else
+      /sbin/hwclock --rtc=$dev --hctosys
+  fi
+  ```
 
   Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano.
 
