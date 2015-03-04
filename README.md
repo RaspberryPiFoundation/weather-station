@@ -53,12 +53,12 @@ Data logging code for the Raspberry Pi Weather Station HAT
   ```
   
   Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano.
-
-1. Reboot for these changes to take effect.
+  
+1. Ensure that a CR/BR1225 3 volt coin cell battery has been inserted into the cage. Positive `+` side facing up.
+1. Reboot for the changes to take effect.
 
   `sudo reboot`
 
-1. Ensure that a CR/BR1225 3 volt coin cell battery has been inserted. Positive `+` side facing up.
 1. Check that the Real Time Clock appears in `/dev`
   
   `ls /dev/rtc*`
