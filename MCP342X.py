@@ -17,6 +17,8 @@ class MCP342X(object):
     def __init__(self, address = 0x69):
         self.dev = i2c_base.i2c(address, 1)
         self.max = 32767.0 #15 bits
+        self.vref = 2.048
+        self.tolerance_percent = 0.5
         self.reset()
 
     def reset(self):
