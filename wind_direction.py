@@ -89,7 +89,7 @@ class wind_direction(object):
         elif s < 0 and c > 0:
             average = arc + 360
 
-        return 0 if average == 360 else average
+        return 0.0 if average == 360 else average
 
     def get_value(self, length=5):
         data = []
