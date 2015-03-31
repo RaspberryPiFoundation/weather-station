@@ -6,7 +6,7 @@ pressure = bmp085.BMP085()
 temp_probe = ds18b20_therm.DS18B20()
 air_qual = tgs2600.TGS2600(adc_channel = 0)
 humidity = HTU21D.HTU21D()
-wind_dir = wind_direction.wind_direction(adc_channel = 0, margin = 20)
+wind_dir = wind_direction.wind_direction(adc_channel = 0, config_file="wind_direction.json")
 interrupts = interrupt_client.interrupt_client(port = 49501)
 
 db = database.weather_database() #Local MySQL db
