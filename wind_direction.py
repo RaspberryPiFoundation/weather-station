@@ -108,4 +108,4 @@ class wind_direction(object):
 
 if __name__ == "__main__":
     obj = wind_direction(0, "wind_direction.json")
-    print obj.get_value(10)
+    print(obj.get_value(10))
