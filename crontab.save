@@ -21,4 +21,4 @@
 # 
 # m h  dom mon dow   command
 */5 * * * * sudo ~/weather-station/log_all_sensors.py
-*/15 * * * * ~/weather-station/upload_to_oracle.py
+0 */2 * * * ~/weather-station/upload_to_oracle.py
