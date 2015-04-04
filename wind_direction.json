@@ -1,6 +1,6 @@
 {
-    "vin": 3.268,
-    "vdivider": 75000,
+    "vin": 3.3,
+    "vdivider": 100000,
     "directions": [
         { "dir": "N",   "angle": 0.0,   "ohms": 33000 },
         { "dir": "NNE", "angle": 22.5,  "ohms": 6570 },
