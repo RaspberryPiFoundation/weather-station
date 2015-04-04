@@ -17,6 +17,8 @@ class MCP342X(object):
     def __init__(self, address = 0x69):
         self.dev = i2c_base.i2c(address, 1)
         self.max = 32767.0 #15 bits
+        self.vref = 2.048
+        self.tolerance_percent = 0.5
         self.reset()
 
     def reset(self):
@@ -62,5 +64,11 @@ if __name__ == "__main__":
     adc_main = MCP342X(address = 0x69) # ADC on the main HAT board
     adc_main.conversion()
 
+    adc_air = MCP342X(address = 0x6A) # ADC on the snap off part with the AIR sensors
+    adc_air.conversion()
+
     print("MAIN CH0: %s" % adc_main.read(CHANNEL_0)) # wind vane
-    print("MAIN CH1: %s" % adc_main.read(CHANNEL_1)) # air quality
+    print("MAIN CH1: %s" % adc_main.read(CHANNEL_1)) # not populated
+
+    print("AIR CH0: %s" % adc_air.read(CHANNEL_0)) # air quality
+    print("AIR CH1: %s" % adc_air.read(CHANNEL_1)) # not populated

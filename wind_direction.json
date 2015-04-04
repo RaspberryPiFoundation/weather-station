@@ -1,0 +1,22 @@
+{
+    "vin": 3.268,
+    "vdivider": 75000,
+    "directions": [
+        { "dir": "N",   "angle": 0.0,   "ohms": 33000 },
+        { "dir": "NNE", "angle": 22.5,  "ohms": 6570 },
+        { "dir": "NE",  "angle": 45.0,  "ohms": 8200 },
+        { "dir": "ENE", "angle": 67.5,  "ohms": 891 },
+        { "dir": "E",   "angle": 90.0,  "ohms": 1000 },
+        { "dir": "ESE", "angle": 112.5, "ohms": 688 },
+        { "dir": "SE",  "angle": 135.0, "ohms": 2200 },
+        { "dir": "SSE", "angle": 157.5, "ohms": 1410 },
+        { "dir": "S",   "angle": 180.0, "ohms": 3900 },
+        { "dir": "SSW", "angle": 202.5, "ohms": 3140 },
+        { "dir": "SW",  "angle": 225.0, "ohms": 16000 },
+        { "dir": "WSW", "angle": 247.5, "ohms": 14120 },
+        { "dir": "W",   "angle": 270.0, "ohms": 120000 },
+        { "dir": "WNW", "angle": 292.5, "ohms": 42120 },
+        { "dir": "NW",  "angle": 315.0, "ohms": 64900 },
+        { "dir": "NNW", "angle": 337.5, "ohms": 21880 }
+    ]
+}
