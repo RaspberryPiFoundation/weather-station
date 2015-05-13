@@ -9,7 +9,7 @@ class BMP085(object):
         self.lastValue = (0, 0)
 
     def get_pressure(self):
-        return self.bmp.readPressure() * 0.001 #kPa
+        return self.bmp.readPressure() * 0.01 #hPa
         
     def get_temperature(self):
         return self.bmp.readTemperature()
