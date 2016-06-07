@@ -9,7 +9,7 @@ This repo is for code and technical stuff.
 Weather Station
 ==============
 
-Data logging code for the Raspberry Pi Weather Station HAT
+Data logging code for the Raspberry Pi Weather Station Shield by Texy
 
 ## Instructions to deploy
 
