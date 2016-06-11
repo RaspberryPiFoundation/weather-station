@@ -1,8 +1,15 @@
 #!/usr/bin/python
-import interrupt_client, MCP342X, wind_direction, HTU21D, bmp085, tgs2600, ds18b20_therm
+import interrupt_client, MCP342X, wind_direction, HTU21D, tgs2600, ds18b20_therm
 import database # requires MySQLdb python 2 library which is not ported to python 3 yet
 
-pressure = bmp085.BMP085()
+from Adafruit_BME280 import *
+sensor = BME280(mode=BME280_OSAMPLE_8)
+pascals = sensor.read_pressure()
+hectopascals = pascals / 100
+bme280_humidity = sensor.read_humidity()
+print "BME280_humidity =", bme280_humidity
+print 'Pressure  = {0:0.2f} hPa'.format(hectopascals)
+
 temp_probe = ds18b20_therm.DS18B20()
 air_qual = tgs2600.TGS2600(adc_channel = 0)
 humidity = HTU21D.HTU21D()
