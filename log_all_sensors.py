@@ -11,8 +11,8 @@ print "BME280_humidity =", bme280_humidity
 print 'Pressure  = {0:0.2f} hPa'.format(hectopascals)
 
 temp_probe = ds18b20_therm.DS18B20()
-#air_qual = tgs2600.TGS2600(adc_channel = 0)
-air_qual = 33 # temporary hack
+air_qual = tgs2600.TGS2600(adc_channel = 1)
+print 'Air Quality  = ',air_qual.get_value(),'%'
 humidity = HTU21D.HTU21D()
 wind_dir = wind_direction.wind_direction(adc_channel = 0, config_file="wind_direction.json")
 interrupts = interrupt_client.interrupt_client(port = 49501)
