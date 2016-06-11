@@ -6,7 +6,7 @@ class TGS2600(object):
         self.adc_channel = adc_channel
         
     def get_value(self):
-        adc = MCP342X.MCP342X(address = 0x6a)
+        adc = MCP342X.MCP342X(address = 0x69) # was 0x6a
         adc_value = adc.read(self.adc_channel)
         return (100.0 / adc.max) * (adc.max - adc_value) #as percentage
 
