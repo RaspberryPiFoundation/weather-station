@@ -46,7 +46,7 @@ class interrupt_watcher(object):
         self.running = False
         
 class wind_speed_interrupt_watcher(interrupt_watcher):
-    def __init__(self, radius_cm, sensorPin, bounceTime, calibration = 1.18):
+    def __init__(self, radius_cm, sensorPin, bounceTime, calibration = 2.36):
         super(wind_speed_interrupt_watcher, self).__init__(sensorPin, bounceTime, peak_sample = 5, peak_monitor = True)
         
         circumference_cm = (2 * math.pi) * radius_cm
