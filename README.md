@@ -1,5 +1,5 @@
 # From 24th March 2016 these instructions are superseded...
-by the guides and tutorials at [https://github.com/raspberrypilearning/weather\_station\_guide](https://github.com/raspberrypilearning/weather_station_guide) (published at [www.raspberrypi.org/weather-station](www.raspberrypi.org/weather-station))
+by the guides and tutorials at [https://github.com/raspberrypilearning/weather\_station\_guide](https://github.com/raspberrypilearning/weather_station_guide) (published at [www.raspberrypi.org/weather-station](https://www.raspberrypi.org/weather-station/))
 
 This repo is for code and technical stuff.
 
