@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 import interrupt_client, MCP342X, wind_direction, HTU21D, bmp085, tgs2600, ds18b20_therm
 import database # requires MySQLdb python 2 library which is not ported to python 3 yet
 

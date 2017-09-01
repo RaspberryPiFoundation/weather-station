@@ -1,10 +1,10 @@
-#!/usr/bin/python3
-import MySQLdb, datetime, http.client, json, os
+#!/usr/bin/python
+import MySQLdb, datetime, httplib, json, os
 # requires MySQLdb python 2 library which is not ported to python 3 yet
 class mysql_database:
     def __init__(self):
-        credentials_file = os.path.join(os.path.dirname(__file__), "credentials.mysql")
-        f = open(credentials_file, "r")
+    	credentials_file = os.path.join(os.path.dirname(__file__), "credentials.mysql")
+    	f = open(credentials_file, "r")
         credentials = json.load(f)
         f.close()
         for key, value in credentials.items(): #remove whitespace
@@ -51,17 +51,17 @@ class oracle_apex_database:
     def upload(self, id, ambient_temperature, ground_temperature, air_quality, air_pressure, humidity, wind_direction, wind_speed, wind_gust_speed, rainfall, created):
         #keys must follow the names expected by the Orcale Apex REST service
         oracle_data = {
-        "LOCAL_ID": str(id),
-        "AMB_TEMP": str(ambient_temperature),
-        "GND_TEMP": str(ground_temperature),
-        "AIR_QUALITY": str(air_quality),
-        "AIR_PRESSURE": str(air_pressure),
-        "HUMIDITY": str(humidity),
-        "WIND_DIRECTION": str(wind_direction),
-        "WIND_SPEED": str(wind_speed),
-        "WIND_GUST_SPEED": str(wind_gust_speed),
-        "RAINFALL": str(rainfall),
-        "READING_TIMESTAMP": str(created) }
+	    "LOCAL_ID": str(id),
+	    "AMB_TEMP": str(ambient_temperature),
+	    "GND_TEMP": str(ground_temperature),
+	    "AIR_QUALITY": str(air_quality),
+	    "AIR_PRESSURE": str(air_pressure),
+	    "HUMIDITY": str(humidity),
+	    "WIND_DIRECTION": str(wind_direction),
+	    "WIND_SPEED": str(wind_speed),
+	    "WIND_GUST_SPEED": str(wind_gust_speed),
+	    "RAINFALL": str(rainfall),
+	    "READING_TIMESTAMP": str(created) }
 
         for key in oracle_data.keys():
             if oracle_data[key] == str(None):

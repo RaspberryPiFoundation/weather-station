@@ -46,7 +46,7 @@ class interrupt_watcher(object):
         self.running = False
         
 class wind_speed_interrupt_watcher(interrupt_watcher):
-    def __init__(self, radius_cm, sensorPin, bounceTime, calibration = 1.18):
+    def __init__(self, radius_cm, sensorPin, bounceTime, calibration = 2.36):
         super(wind_speed_interrupt_watcher, self).__init__(sensorPin, bounceTime, peak_sample = 5, peak_monitor = True)
         
         circumference_cm = (2 * math.pi) * radius_cm
@@ -84,8 +84,8 @@ class interrupt_daemon(object):
         self.socket_data = "{0}\n"
         
     def setup(self):
-        self.rain = rainfall_interrupt_watcher(0.2794, 27, 300) #Maplin rain gauge = 0.2794 ml per bucket tip
-        self.wind = wind_speed_interrupt_watcher(9.0, 17, 1) #Maplin anemometer = radius of 9 cm
+        self.rain = rainfall_interrupt_watcher(0.2794, 6, 300) #Maplin rain gauge = 0.2794 ml per bucket tip, was 27 on prototype
+        self.wind = wind_speed_interrupt_watcher(9.0, 5, 1) #Maplin anemometer = radius of 9 cm, was 17 on prototype
         
         try:
             self.skt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
