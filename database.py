@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import MySQLdb, datetime, http.client, json, os
-# requires MySQLdb python 2 library which is not ported to python 3 yet
+
 class mysql_database:
     def __init__(self):
         credentials_file = os.path.join(os.path.dirname(__file__), "credentials.mysql")
@@ -9,8 +9,8 @@ class mysql_database:
         f.close()
         for key, value in credentials.items(): #remove whitespace
             credentials[key] = value.strip()
-            
-        self.connection = MySQLdb.connect(credentials["HOST"], credentials["USERNAME"], credentials["PASSWORD"], credentials["DATABASE"])
+
+        self.connection = MySQLdb.connect(user=credentials["USERNAME"], password=credentials["PASSWORD"], database=credentials["DATABASE"])
         self.cursor = self.connection.cursor()
 
     def execute(self, query, params = []):
@@ -36,7 +36,7 @@ class oracle_apex_database:
         self.conn = httplib.HTTPSConnection(self.host)
         self.credentials = None
         credentials_file = os.path.join(os.path.dirname(__file__), "credentials.oracle")
-        
+
         if os.path.isfile(credentials_file):
             f = open(credentials_file, "r")
             self.credentials = json.load(f)
@@ -136,16 +136,16 @@ class weather_database:
 
             for row in results:
                 response_data = odb.upload(
-                    row["ID"], 
-                    row["AMBIENT_TEMPERATURE"], 
+                    row["ID"],
+                    row["AMBIENT_TEMPERATURE"],
                     row["GROUND_TEMPERATURE"],
-                    row["AIR_QUALITY"], 
-                    row["AIR_PRESSURE"], 
-                    row["HUMIDITY"], 
-                    row["WIND_DIRECTION"], 
-                    row["WIND_SPEED"], 
-                    row["WIND_GUST_SPEED"], 
-                    row["RAINFALL"], 
+                    row["AIR_QUALITY"],
+                    row["AIR_PRESSURE"],
+                    row["HUMIDITY"],
+                    row["WIND_DIRECTION"],
+                    row["WIND_SPEED"],
+                    row["WIND_GUST_SPEED"],
+                    row["RAINFALL"],
                     row["CREATED"].strftime("%Y-%m-%dT%H:%M:%S"))
 
                 if response_data != None and response_data != "-1":
