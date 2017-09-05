@@ -99,7 +99,7 @@ EOT
 
 ## Get the weather station python files
 cd ~
-git clone https://github.com/raspberrypi/weather-station.git
+#git clone https://github.com/raspberrypi/weather-station.git
 
 ## Setup rc.local to start weatherstaion daemon
 sudo sed -i '/exit 0/d' /etc/rc.local
