@@ -33,7 +33,8 @@ class oracle_apex_database:
     def __init__(self, path, host = "apex.oracle.com"):
         self.host = host
         self.path = path
-        self.conn = httplib.HTTPSConnection(self.host)
+        #self.conn = httplib.HTTPSConnection(self.host)
+        self.conn = http.client.HTTPSConnection(self.host)
         self.credentials = None
         credentials_file = os.path.join(os.path.dirname(__file__), "credentials.oracle")
 
@@ -71,7 +72,11 @@ class oracle_apex_database:
 
     def https_post(self, data, attempts = 3):
         attempt = 0
-        headers = dict(self.default_data.items() + self.credentials.items() + data.items())
+        headers = self.default_data.copy()
+        headers.update(self.credentials)
+        headers.update(data)
+
+        #headers = dict(self.default_data.items() + self.credentials.items() + data.items())
         success = False
         response_data = None
 
@@ -149,7 +154,7 @@ class weather_database:
                     row["CREATED"].strftime("%Y-%m-%dT%H:%M:%S"))
 
                 if response_data != None and response_data != "-1":
-                    json_dict = json.loads(response_data)
+                    json_dict = json.loads(response_data.decode())
                     oracle_id = json_dict["ORCL_RECORD_ID"]
                     if self.is_number(oracle_id):
                         local_id = str(row["ID"])
