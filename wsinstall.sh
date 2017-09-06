@@ -67,19 +67,19 @@ echo 'Installing required packages'
 sudo apt-get install i2c-tools python-smbus telnet -y
 
 ## Set password for mysql-server
-echo 'You need to choose a password for your database'
-read -s -p "Password: " PASS1
+echo 'Please choose a password for your database'
+read -s -p "Password: " PASS1 < /dev/tty
 echo
-read -s -p "Password (again): " PASS2
+read -s -p "Password (again): " PASS2 < /dev/tty
 
 # check if passwords match and if not ask again
 while [ "$PASS1" != "$PASS2" ];
 do
     echo
     echo "Please try again"
-    read -s -p "Password: " PASS1
+    read -s -p "Password: " PASS1 < /dev/tty
     echo
-    read -s -p "Password (again): " PASS2
+    read -s -p "Password (again): " PASS2 < /dev/tty
 done
 
 echo 'Installing local database'
