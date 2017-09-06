@@ -4,8 +4,14 @@ echo 'Please ensure your Weather Station HAT is connected to you Raspberry Pi, w
 echo 'Please ensure your Raspberry Pi is connected to the Internet'
 
 ## Check ready to start
-echo 'Press any key to continue'
-read -n 1 -s
+echo "Do you want to install the Weather Station software?"
+read -r -p "$1 [y/N] " response < /dev/tty
+if [[ $response =~ ^(yes|y|Y)$ ]]; then
+    echo "Starting"
+else
+    echo "Exiting"
+    exit
+fi
 
 echo 'Updating Raspbian'
 ## Update and upgrade - especially important for old NOOBS installs and I2C integration
