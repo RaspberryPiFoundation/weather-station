@@ -19,7 +19,7 @@ sudo apt-get update && sudo apt-get upgrade -y
 
 # These pacakages needed if using Stretch-lite image
 
-sudo apt-get install python3-smbus git python3-pip
+sudo apt-get install python3-smbus git python3-pip -y
 sudo pip3 install RPi.GPIO
 ##E nable I2C
 echo ' Enabling I2C'
