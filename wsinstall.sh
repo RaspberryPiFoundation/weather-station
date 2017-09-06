@@ -11,6 +11,10 @@ echo 'Updating Raspbian'
 ## Update and upgrade - especially important for old NOOBS installs and I2C integration
 sudo apt-get update && sudo apt-get upgrade -y
 
+# These pacakages needed if using Stretch-lite image
+
+sudo apt-get install python3-smbus git python3-pip
+sudo pip install RPi.GPIO
 ##E nable I2C
 echo ' Enabling I2C'
 sudo raspi-config nonint do_i2c 0
