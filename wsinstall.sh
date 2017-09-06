@@ -114,7 +114,7 @@ EOT
 
 ## Get the weather station python files
 cd ~
-#git clone https://github.com/raspberrypi/weather-station.git
+git clone https://github.com/raspberrypi/weather-station.git
 
 ## Setup rc.local to start weatherstaion daemon
 sudo sed -i '/exit 0/d' /etc/rc.local
@@ -124,6 +124,7 @@ echo 'exit 0' | sudo tee -a /etc/rc.local
 
 ## Add in correct sql credentials
 cd weather-station
+git checkout stretch
 cat <<EOT > credentials.mysql
 {
 "HOST": "localhost",
