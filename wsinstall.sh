@@ -43,12 +43,12 @@ fi
 ## Initialise RTC with correct time
 echo "The current date and time set is:"
 date
-read -r -p "Is this correct [y/N] " response
-response=${response,,}    # tolower
-if [[ $response =~ ^(yes|y)$ ]]; then
+read -r -p "Is this correct [y/N] " response2 < /dev/tty
+response2=${response2,,}    # tolower
+if [[ $response2 =~ ^(yes|y)$ ]]; then
     sudo hwclock -w
 else
-    read -p "Enter todays date and time (yyyy-mm-dd hh:mm:ss): " user_date
+    read -p "Enter todays date and time (yyyy-mm-dd hh:mm:ss): "  user_date < /dev/tty
     sudo hwclock --set --date="$user_date" --utc #set hardware clock
 fi
 
@@ -142,8 +142,8 @@ echo 'You should have registered you weather station at'
 echo 'https://apex.oracle.com/pls/apex/f?p=81290:LOGIN_DESKTOP:0:::::&tz=1:00'
 echo 'You should have a Weather Station Name'
 echo 'You should have a Weather Station Key'
-read -p "Please type in your Weather Station Name: " name
-read -p "Please type in your Weather Station Key: " key
+read -p "Please type in your Weather Station Name: " name < /dev/tty
+read -p "Please type in your Weather Station Key: " key < /dev/tty
 
 cat <<EOT > credentials.oracle
 {
