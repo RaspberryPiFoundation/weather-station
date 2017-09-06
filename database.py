@@ -1,16 +1,16 @@
-#!/usr/bin/python
-import MySQLdb, datetime, httplib, json, os
-# requires MySQLdb python 2 library which is not ported to python 3 yet
+#!/usr/bin/python3
+import MySQLdb, datetime, http.client, json, os
+
 class mysql_database:
     def __init__(self):
-    	credentials_file = os.path.join(os.path.dirname(__file__), "credentials.mysql")
-    	f = open(credentials_file, "r")
+        credentials_file = os.path.join(os.path.dirname(__file__), "credentials.mysql")
+        f = open(credentials_file, "r")
         credentials = json.load(f)
         f.close()
         for key, value in credentials.items(): #remove whitespace
             credentials[key] = value.strip()
-            
-        self.connection = MySQLdb.connect(credentials["HOST"], credentials["USERNAME"], credentials["PASSWORD"], credentials["DATABASE"])
+
+        self.connection = MySQLdb.connect(user=credentials["USERNAME"], password=credentials["PASSWORD"], database=credentials["DATABASE"])
         self.cursor = self.connection.cursor()
 
     def execute(self, query, params = []):
@@ -33,10 +33,11 @@ class oracle_apex_database:
     def __init__(self, path, host = "apex.oracle.com"):
         self.host = host
         self.path = path
-        self.conn = httplib.HTTPSConnection(self.host)
+        #self.conn = httplib.HTTPSConnection(self.host)
+        self.conn = http.client.HTTPSConnection(self.host)
         self.credentials = None
         credentials_file = os.path.join(os.path.dirname(__file__), "credentials.oracle")
-        
+
         if os.path.isfile(credentials_file):
             f = open(credentials_file, "r")
             self.credentials = json.load(f)
@@ -51,17 +52,17 @@ class oracle_apex_database:
     def upload(self, id, ambient_temperature, ground_temperature, air_quality, air_pressure, humidity, wind_direction, wind_speed, wind_gust_speed, rainfall, created):
         #keys must follow the names expected by the Orcale Apex REST service
         oracle_data = {
-	    "LOCAL_ID": str(id),
-	    "AMB_TEMP": str(ambient_temperature),
-	    "GND_TEMP": str(ground_temperature),
-	    "AIR_QUALITY": str(air_quality),
-	    "AIR_PRESSURE": str(air_pressure),
-	    "HUMIDITY": str(humidity),
-	    "WIND_DIRECTION": str(wind_direction),
-	    "WIND_SPEED": str(wind_speed),
-	    "WIND_GUST_SPEED": str(wind_gust_speed),
-	    "RAINFALL": str(rainfall),
-	    "READING_TIMESTAMP": str(created) }
+        "LOCAL_ID": str(id),
+        "AMB_TEMP": str(ambient_temperature),
+        "GND_TEMP": str(ground_temperature),
+        "AIR_QUALITY": str(air_quality),
+        "AIR_PRESSURE": str(air_pressure),
+        "HUMIDITY": str(humidity),
+        "WIND_DIRECTION": str(wind_direction),
+        "WIND_SPEED": str(wind_speed),
+        "WIND_GUST_SPEED": str(wind_gust_speed),
+        "RAINFALL": str(rainfall),
+        "READING_TIMESTAMP": str(created) }
 
         for key in oracle_data.keys():
             if oracle_data[key] == str(None):
@@ -71,7 +72,11 @@ class oracle_apex_database:
 
     def https_post(self, data, attempts = 3):
         attempt = 0
-        headers = dict(self.default_data.items() + self.credentials.items() + data.items())
+        headers = self.default_data.copy()
+        headers.update(self.credentials)
+        headers.update(data)
+
+        #headers = dict(self.default_data.items() + self.credentials.items() + data.items())
         success = False
         response_data = None
 
@@ -136,20 +141,20 @@ class weather_database:
 
             for row in results:
                 response_data = odb.upload(
-                    row["ID"], 
-                    row["AMBIENT_TEMPERATURE"], 
+                    row["ID"],
+                    row["AMBIENT_TEMPERATURE"],
                     row["GROUND_TEMPERATURE"],
-                    row["AIR_QUALITY"], 
-                    row["AIR_PRESSURE"], 
-                    row["HUMIDITY"], 
-                    row["WIND_DIRECTION"], 
-                    row["WIND_SPEED"], 
-                    row["WIND_GUST_SPEED"], 
-                    row["RAINFALL"], 
+                    row["AIR_QUALITY"],
+                    row["AIR_PRESSURE"],
+                    row["HUMIDITY"],
+                    row["WIND_DIRECTION"],
+                    row["WIND_SPEED"],
+                    row["WIND_GUST_SPEED"],
+                    row["RAINFALL"],
                     row["CREATED"].strftime("%Y-%m-%dT%H:%M:%S"))
 
                 if response_data != None and response_data != "-1":
-                    json_dict = json.loads(response_data)
+                    json_dict = json.loads(response_data.decode()) # Python3 change
                     oracle_id = json_dict["ORCL_RECORD_ID"]
                     if self.is_number(oracle_id):
                         local_id = str(row["ID"])

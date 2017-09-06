@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import bmpBackend
 
 class BMP085(object):
@@ -10,6 +10,6 @@ class BMP085(object):
 
     def get_pressure(self):
         return self.bmp.readPressure() * 0.01 #hPa
-        
+
     def get_temperature(self):
         return self.bmp.readTemperature()

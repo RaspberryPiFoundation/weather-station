@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # Origin: https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code
 
 import smbus
@@ -32,16 +32,16 @@ class Adafruit_I2C :
       self.bus.write_byte_data(self.address, reg, value)
       if (self.debug):
         print("I2C: Wrote 0x%02X to register 0x%02X" % (value, reg))
-    except IOError, err:
-      print "Error accessing 0x%02X: Check your I2C address" % self.address
+    except IOError  as err:
+      print( "Error accessing 0x%02X: Check your I2C address" % self.address)
       return -1
 
   def writeList(self, reg, list):
     "Writes an array of bytes using I2C format"
     try:
       self.bus.write_i2c_block_data(self.address, reg, list)
-    except IOError, err:
-      print "Error accessing 0x%02X: Check your I2C address" % self.address
+    except IOError  as err:
+      print( "Error accessing 0x%02X: Check your I2C address" % self.address)
       return -1
 
   def readU8(self, reg):
@@ -49,10 +49,10 @@ class Adafruit_I2C :
     try:
       result = self.bus.read_byte_data(self.address, reg)
       if (self.debug):
-        print "I2C: Device 0x%02X returned 0x%02X from reg 0x%02X" % (self.address, result & 0xFF, reg)
+        print( "I2C: Device 0x%02X returned 0x%02X from reg 0x%02X" % (self.address, result & 0xFF, reg))
       return result
-    except IOError, err:
-      print "Error accessing 0x%02X: Check your I2C address" % self.address
+    except IOError as err:
+      print( "Error accessing 0x%02X: Check your I2C address" % self.address)
       return -1
 
   def readS8(self, reg):
@@ -60,13 +60,13 @@ class Adafruit_I2C :
     try:
       result = self.bus.read_byte_data(self.address, reg)
       if (self.debug):
-        print "I2C: Device 0x%02X returned 0x%02X from reg 0x%02X" % (self.address, result & 0xFF, reg)
+        print( "I2C: Device 0x%02X returned 0x%02X from reg 0x%02X" % (self.address, result & 0xFF, reg))
       if (result > 127):
         return result - 256
       else:
         return result
-    except IOError, err:
-      print "Error accessing 0x%02X: Check your I2C address" % self.address
+    except IOError as err:
+      print( "Error accessing 0x%02X: Check your I2C address" % self.address)
       return -1
 
   def readU16(self, reg):
@@ -75,10 +75,10 @@ class Adafruit_I2C :
       hibyte = self.bus.read_byte_data(self.address, reg)
       result = (hibyte << 8) + self.bus.read_byte_data(self.address, reg+1)
       if (self.debug):
-        print "I2C: Device 0x%02X returned 0x%04X from reg 0x%02X" % (self.address, result & 0xFFFF, reg)
+        print( "I2C: Device 0x%02X returned 0x%04X from reg 0x%02X" % (self.address, result & 0xFFFF, reg))
       return result
-    except IOError, err:
-      print "Error accessing 0x%02X: Check your I2C address" % self.address
+    except IOError as err:
+      print("Error accessing 0x%02X: Check your I2C address" % self.address)
       return -1
 
   def readS16(self, reg):
@@ -89,8 +89,8 @@ class Adafruit_I2C :
         hibyte -= 256
       result = (hibyte << 8) + self.bus.read_byte_data(self.address, reg+1)
       if (self.debug):
-        print "I2C: Device 0x%02X returned 0x%04X from reg 0x%02X" % (self.address, result & 0xFFFF, reg)
+        print( "I2C: Device 0x%02X returned 0x%04X from reg 0x%02X" % (self.address, result & 0xFFFF, reg))
       return result
-    except IOError, err:
-      print "Error accessing 0x%02X: Check your I2C address" % self.address
+    except IOError as err:
+      print( "Error accessing 0x%02X: Check your I2C address" % self.address)
       return -1

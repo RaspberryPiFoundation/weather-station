@@ -30,7 +30,7 @@ class interrupt_client(object):
         return self.send_command("GUST")
         
     def reset(self):
-        self.client.sendall("RESET")
+        self.client.sendall(b"RESET")
         assert(self.get_data() == "OK")
         print("Counts reset")
         

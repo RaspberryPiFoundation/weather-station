@@ -1,0 +1,141 @@
+    1  sudo apt-get update
+    2  sudo apt-get upgrade
+    3  sudo raspi-config nonint do_i2c 0
+    4  ifconfig
+    5  echo "dtoverlay=w1-gpio" | sudo tee -a /boot/config.txt
+    6  echo "dtoverlay=pcf8523-rtc" | sudo tee -a /boot/config.txt
+    7  echo "i2c-dev" | sudo tee -a /etc/modules
+    8  echo "w1-therm" | sudo tee -a /etc/modules
+    9  date
+   10  sudo hwclock -w
+   11  sudo hwclock -s
+   12  sudo perl -pi -e 's/systz/hctosys/g' /lib/udev/hwclock-set
+   13  sudo update-rc.d fake-hwclock remove
+   14  sudo apt-get remove fake-hwclock -y
+   15  sudo apt-get install i2c-tools python-smbus telnet -y
+   16  sudo apt-get -y mariadb-server mariadb-client
+   17  sudo apt-get install -y mariadb-server mariadb-client
+   18  mysql
+   19  mysql -u root
+   20  mysql -u root -p
+   21  mysql_secure_installation
+   22  sudo mysql
+   23  sudo apt-get install apache2 python-mysqldb php5 libapache2-mod-php5 php5-mysql 
+   24  sudo apt-get install php-mysql 
+   25  git clone https://github.com/raspberrypi/weather-station.git
+   26  sudo sed -i '/exit 0/d' /etc/rc.local
+   27  echo 'echo "Starting Weather Station daemon..."' | sudo tee -a /etc/rc.local
+   28  echo '/home/pi/weather-station/interrupt_daemon.py start' | sudo tee -a /etc/rc.
+   29  echo '/home/pi/weather-station/interrupt_daemon.py start' | sudo tee -a /etc/rc.local
+   30  echo 'exit 0' | sudo tee -a /etc/rc.local
+   31  more /etc/rc.local 
+   32  cd weather-station/
+   33  ./log_all_sensors.py 
+   34  sudo pip install mysqldb
+   35  sudo pip3 install mysqldb
+   36  sudo pip3 install mysql
+   37  sudo pip3 install mysqllib
+   38  sudo pip3 install mysqlclient
+   39  sudo pip3 install mysql-python
+   40  sudo pip3 install configparser
+   41  sudo pip3 install mysql-python
+   42  python3
+   43  sudo pip3 install configparser
+   44  python3
+   45  sudo apt-get install python3-mysql
+   46  sudo pip3 install mysql-python
+   47  sudo apt-get install python3-dev
+   48  python3
+   49  sudo pip3 install mysqlclient
+   50  sudo apt-get install libmariadbclient-dev
+   51  sudo pip3 install mysqlclient
+   52  vi log_all_sensors.py 
+   53  ./log_all_sensors.py 
+   54  cp log_all_sensors.py las2.py
+   55  vi las2.py 
+   56  cp database.py database.py.old
+   57  vi database.py
+   58  python3
+   59  sudo pip3 install mysqlclient
+   60  python3
+   61  vi database.py
+   62  ./log_all_sensors.py 
+   63  vi log_all_sensors.py 
+   64  ./log_all_sensors.py 
+   65  vi log_all_sensors.py 
+   66  vi bmpBackend.py
+   67  cp bmpBackend.py bmpBackend.py.old
+   68  vi bmpBackend.py
+   69  ./log_all_sensors.py 
+   70  cp Adafruit_I2C.py Adafruit_I2C.py.old
+   71  vi Adafruit_I2C.py
+   72  ./log_all_sensors.py 
+   73  vi Adafruit_I2C.py
+   74  ./log_all_sensors.py 
+   75  vi Adafruit_I2C.py
+   76  ./log_all_sensors.py 
+   77  vi database.py
+   78  ./log_all_sensors.py 
+   79  vi database.py
+   80  ./log_all_sensors.py 
+   81  vi Adafruit_I2C.py
+   82  ./log_all_sensors.py 
+   83  vi Adafruit_I2C.py
+   84  ./log_all_sensors.py 
+   85  vi Adafruit_I2C.py
+   86  ./log_all_sensors.py 
+   87  vi Adafruit_I2C.py
+   88  ./log_all_sensors.py 
+   89  sudo log_all_sensors.py 
+   90  sudo ./log_all_sensors.py 
+   91  ./log_all_sensors.py 
+   92  sudo reboot
+   93  cd weather-station/
+   94  ./log_all_sensors.py 
+   95  vi database.py
+   96  python3
+   97  sudo pip3 install mysql-python
+   98  sudo pip install mysql-python
+   99  python
+  100  sudo pip install mysql-python
+  101  python
+  102  python3
+  103  sudo python3
+  104  python3
+  105  sudo mysql
+  106  mysql -u bob -p
+  107  sudo mysql
+  108  mysql -u bob -p
+  109  python3
+  110  sudo python3
+  111  python3
+  112  history | more
+  113  cd weather-station/
+  114  vi database.py
+  115  ls
+  116  vi credentials.mysql 
+  117  ./log_all_sensors.py 
+  118  vi bmpBackend.py
+  119  ./log_all_sensors.py 
+  120  vi bmpBackend.py
+  121  ./log_all_sensors.py 
+  122  vi bmpBackend.py
+  123  ./log_all_sensors.py 
+  124  vi bmpBackend.py
+  125  ./log_all_sensors.py 
+  126  vi bmpBackend.py
+  127  ./log_all_sensors.py 
+  128  vi log_all_sensors.py 
+  129  vi interrupt_client.py
+  130  vi log_all_sensors.py 
+  131  ./log_all_sensors.py 
+  132  vi interrupt_client.py
+  133  ./log_all_sensors.py 
+  134  vi interrupt_client.py
+  135  ls -l
+  136  cp interrupt_client.py interrupt_client.py.old
+  137  vi interrupt_client.py.old
+  138  203
+  139  ifconfig
+  140  ls
+  141  history > ~/history.txt
