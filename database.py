@@ -154,7 +154,7 @@ class weather_database:
                     row["CREATED"].strftime("%Y-%m-%dT%H:%M:%S"))
 
                 if response_data != None and response_data != "-1":
-                    json_dict = json.loads(response_data.decode())
+                    json_dict = json.loads(response_data.decode()) # Python3 change
                     oracle_id = json_dict["ORCL_RECORD_ID"]
                     if self.is_number(oracle_id):
                         local_id = str(row["ID"])

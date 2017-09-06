@@ -7,10 +7,12 @@ echo 'Please ensure your Raspberry Pi is connected to the Internet'
 echo 'Press any key to continue'
 read -n 1 -s
 
+echo 'Updating Raspbian'
 ## Update and upgrade - especially important for old NOOBS installs and I2C integration
 sudo apt-get update && sudo apt-get upgrade -y
 
 ##E nable I2C
+echo ' Enabling I2C'
 sudo raspi-config nonint do_i2c 0
 
 ## Update config files.
@@ -19,6 +21,7 @@ echo "dtoverlay=pcf8523-rtc" | sudo tee -a /boot/config.txt
 echo "i2c-dev" | sudo tee -a /etc/modules
 echo "w1-therm" | sudo tee -a /etc/modules
 
+echo 'Setting up RTC'
 ## Check the RTC exists
 if ls /dev/rtc** 1> /dev/null 2>&1; then
     echo "RTC found"
@@ -49,6 +52,7 @@ sudo perl -pi -e 's/systz/hctosys/g' /lib/udev/hwclock-set
 sudo update-rc.d fake-hwclock remove
 sudo apt-get remove fake-hwclock -y
 
+echo 'Installing required packages'
 ## Install com tools
 sudo apt-get install i2c-tools python-smbus telnet -y
 
@@ -68,6 +72,7 @@ do
     read -s -p "Password (again): " PASS2
 done
 
+echo 'Installing local database'
 sudo apt-get install -y mariadb-server mariadb-client libmariadbclient-dev
 sudo apt-get install -y apache2 php5 libapache2-mod-php5 php-mysql
 sudo pip3 install mysqlclient
