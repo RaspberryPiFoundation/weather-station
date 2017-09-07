@@ -151,5 +151,5 @@ cat <<EOT > credentials.oracle
 "WEATHER_STN_PASS": "$key"
 }
 EOT
-
+echo "All done - rebooting"
 sudo reboot
