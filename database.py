@@ -1,5 +1,17 @@
 #!/usr/bin/python3
 import MySQLdb, datetime, http.client, json, os
+import io
+import gzip
+
+
+def gunzip_bytes(bytes_obj):
+    in_ = io.BytesIO()
+    in_.write(bytes_obj)
+    in_.seek(0)
+    with gzip.GzipFile(fileobj=in_, mode='rb') as fo:
+        gunzipped_bytes_obj = fo.read()
+
+    return gunzipped_bytes_obj.decode()
 
 class mysql_database:
     def __init__(self):
@@ -154,7 +166,8 @@ class weather_database:
                     row["CREATED"].strftime("%Y-%m-%dT%H:%M:%S"))
 
                 if response_data != None and response_data != "-1":
-                    json_dict = json.loads(response_data.decode()) # Python3 change
+                    json_dict = json.loads(gunzip_bytes(response_data)) # 2019 post-apex upgrade change
+                    #json_dict = json.loads(response_data.decode()) # Python3 change
                     oracle_id = json_dict["ORCL_RECORD_ID"]
                     if self.is_number(oracle_id):
                         local_id = str(row["ID"])
