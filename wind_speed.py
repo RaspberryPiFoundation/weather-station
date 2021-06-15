@@ -14,12 +14,12 @@ anemometer_pin = 6  # originally 5
 wind_count = 0  # count half-rotations of anemometer
 radius_cm = 9.0  # radius in cm of anemometer
 circumference_cm = (2 * math.pi) * radius_cm
-wind_interval = 30  # how often (seconds) to report
+wind_interval = 60  # how often (seconds) to report
 anemometer_factor = 1.18  # default anemometer factor
 store_speeds = []
 
 mqtt_host = os.getenv('MQTT_HOST') if os.getenv('MQTT_HOST') else '192.168.2.104'
-mqtt_client_id = os.getenv('HOSTNAME') if os.getenv('HOSTNAME') else 'weather-station'
+mqtt_client_id = os.getenv('HOSTNAME') if os.getenv('HOSTNAME') else 'ws1-anemometer'
 mqtt_topic_base = os.getenv('MQTT_TOPIC') if os.getenv('MQTT_TOPIC') else f"{mqtt_client_id}/ads-ws1"
 mqtt_anemometer_topic = f"{mqtt_topic_base}/anemometer1"
 mqtt_wind_vane_topic = f"{mqtt_topic_base}/anemometer1"

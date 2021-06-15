@@ -1,11 +1,11 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 import os, glob, time
 import paho.mqtt.client as mqtt
 
-interval = 30  # seconds
+interval = 60  # seconds
 
 mqtt_host = os.getenv('MQTT_HOST') if os.getenv('MQTT_HOST') else '192.168.2.104'
-mqtt_client_id = os.getenv('HOSTNAME') if os.getenv('HOSTNAME') else 'weather-station'
+mqtt_client_id = os.getenv('HOSTNAME') if os.getenv('HOSTNAME') else 'ws1-groundtemp'
 mqtt_topic_base = os.getenv('MQTT_TOPIC') if os.getenv('MQTT_TOPIC') else f"{mqtt_client_id}/ads-ws1"
 mqtt_ground_temp_topic = f"{mqtt_topic_base}/ground_temp1"
 
@@ -61,5 +61,5 @@ if __name__ == "__main__":
     while True:
         ground_temp_f = obj.read_temp_f()
         print(f"topic:{mqtt_ground_temp_topic} payload:{ground_temp_f}")
-        mqtt_client.publish(topic=mqtt_ground_temp_topic, payload=ground_temp_f)
+        print(mqtt_client.publish(topic=mqtt_ground_temp_topic, payload=ground_temp_f))
         time.sleep(interval)

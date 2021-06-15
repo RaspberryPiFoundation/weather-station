@@ -9,10 +9,10 @@ MM_TO_IN = 0.0393701
 rain_sensor = Button(5)  # originally 6
 count = 0
 interval = 60  # seconds
-interval = 5  # for testing (impatient)
+verbose = False
 
 mqtt_host = os.getenv('MQTT_HOST') if os.getenv('MQTT_HOST') else '192.168.2.104'
-mqtt_client_id = os.getenv('HOSTNAME') if os.getenv('HOSTNAME') else 'weather-station'
+mqtt_client_id = os.getenv('HOSTNAME') if os.getenv('HOSTNAME') else 'ws1-rainfall'
 mqtt_topic_base = os.getenv('MQTT_TOPIC') if os.getenv('MQTT_TOPIC') else f"{mqtt_client_id}/ads-ws1"
 mqtt_rainfall_topic = f"{mqtt_topic_base}/rainfall1"
 
@@ -42,8 +42,12 @@ rain_sensor.when_pressed = bucket_tipped
 
 while True:
     reset_rainfall()
-    time.sleep(interval)
     rainfall = calculate_rainfall(interval)
-    print(f"topic:{mqtt_rainfall_topic} payload:{rainfall}")
-    mqtt_client.publish(topic=mqtt_rainfall_topic, payload=rainfall)
+    res, _msg_id = mqtt_client.publish(topic=mqtt_rainfall_topic, payload=rainfall)
+    if res == mqtt.MQTT_ERR_SUCCESS:
+        if verbose:
+            print(f"topic:{mqtt_rainfall_topic} payload:{rainfall}")
+    else:
+        print(f"error publishing mqtt: {res}")
+    time.sleep(interval)
 
