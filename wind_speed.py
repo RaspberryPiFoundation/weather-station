@@ -10,7 +10,7 @@ CM_IN_A_KM = 100000.0
 SECS_IN_AN_HOUR = 3600
 KM_TO_MI = 0.621371
 
-anemometer_pin = 6  # originally 5
+anemometer_pin = 24  # originally 5
 wind_count = 0  # count half-rotations of anemometer
 radius_cm = 9.0  # radius in cm of anemometer
 circumference_cm = (2 * math.pi) * radius_cm

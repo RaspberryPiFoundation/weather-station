@@ -6,7 +6,7 @@ from gpiozero import Button
 BUCKET_SIZE = 0.2794  # mm
 MM_TO_IN = 0.0393701
 
-rain_sensor = Button(5)  # originally 6
+rain_sensor = Button(25)  # originally 6
 count = 0
 interval = 60  # seconds
 verbose = False
