@@ -127,15 +127,15 @@ class weather_database:
         return val if val != None else "NULL"
 
     def insert(self, ambient_temperature, ground_temperature, air_quality, air_pressure, humidity, wind_direction, wind_speed, wind_gust_speed, rainfall, created = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")):
-        params = ( ambient_temperature,
-            ground_temperature,
-            air_quality,
-            air_pressure,
-            humidity,
-            wind_direction,
-            wind_speed,
-            wind_gust_speed,
-            rainfall,
+        params = ( str(round(ambient_temperature,2)),
+            str(round(ground_temperature,2)),
+            str(round(air_quality,2)),
+            str(round(air_pressure,2)),
+            str(round(humidity,2)),
+            str(round(wind_direction,2)),
+            str(round(wind_speed,2)),
+            str(round(wind_gust_speed,2)),
+            str(round(rainfall,2)),
             created )
         print(self.insert_template % params)
         self.db.execute(self.insert_template, params)
